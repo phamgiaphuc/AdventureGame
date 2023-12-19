@@ -1,20 +1,28 @@
 package dev.controller;
 
-import dev.entities.GameConstants;
-import dev.entities.Player;
-
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.JPanel;
+
+import dev.entities.GameConstants;
+import dev.entities.Player;
+
 public class GameHandler extends JPanel implements Runnable, GameConstants {
+
     Thread gameThread = null;
-    KeyHandler keyHandler = new KeyHandler();
-    Player player = new Player(((maxScreenCol - 1) / 2) * tileSize, ((maxScreenRow - 1) / 2) * tileSize, "Thien");
-    PlayerHandler playerHandler = new PlayerHandler(keyHandler, player);
-    TileHandler tileHandler = new TileHandler();
+
+    public KeyHandler keyHandler = new KeyHandler();
+    //public Player player = new Player(((maxScreenCol - 1) / 2) * tileSize, ((maxScreenRow - 1) / 2) * tileSize, "Thien");
+    public Player player = new Player(9 * tileSize, 9 * tileSize, "Thien");
+    
+    public PlayerHandler playerHandler = new PlayerHandler(this, keyHandler, player);
+    public TileHandler tileHandler = new TileHandler();
+
+    public CollisionChecker checker = new CollisionChecker(this);
+
     public GameHandler() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);

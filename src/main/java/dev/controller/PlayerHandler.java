@@ -1,43 +1,66 @@
 package dev.controller;
 
-import dev.entities.Player;
-
-import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Objects;
+
+import javax.imageio.ImageIO;
+
+import dev.entities.Player;
 
 public class PlayerHandler {
     BufferedImage boy_up_1, boy_up_2, boy_down_1, boy_down_2, boy_right_1, boy_right_2, boy_left_1, boy_left_2;
-    String direction;
+    GameHandler gh;
     int spriteCounter = 0, spriteNum = 1;
     KeyHandler player_keyHandler;
     Player player;
 
-    public PlayerHandler (KeyHandler player_keyHandler, Player player) {
+    public PlayerHandler (GameHandler gh,KeyHandler player_keyHandler, Player player) {
+        this.gh = gh;
         this.player_keyHandler = player_keyHandler;
         this.player = player;
         getPlayerImage();
-        direction = "down";
+        player.direction = "down";
     }
 
     public void update() {
         if (player_keyHandler.upPressed || player_keyHandler.downPressed || player_keyHandler.leftPressed || player_keyHandler.rightPressed) {
             if (player_keyHandler.upPressed) {
-                direction = "up";
-                player.setY(player.getY() - player.getSpeed());
+                player.direction = "up";
+                //player.setY(player.getY() - player.getSpeed());
             } else if (player_keyHandler.downPressed) {
-                direction = "down";
-                player.setY(player.getY() + player.getSpeed());
+                player.direction = "down";
+                //player.setY(player.getY() + player.getSpeed());
             } else if (player_keyHandler.rightPressed) {
-                direction = "right";
-                player.setX(player.getX() + player.getSpeed());
-            } else {
-                direction = "left";
-                player.setX(player.getX() - player.getSpeed());
+                player.direction = "right";
+                //player.setX(player.getX() + player.getSpeed());
+            } else if (player_keyHandler.leftPressed){
+                player.direction = "left";
+                //player.setX(player.getX() - player.getSpeed());
             }
+            
+            
+            player.isCollide = false;
+            gh.checker.checkTile(player);
+
+            if(player.isCollide == false){
+                switch (player.direction) {
+                    case "up":
+                        player.y_coordinate -= player.speed;
+                        break;
+                    case "down":
+                        player.y_coordinate += player.speed;
+                        break;
+                    case "left":
+                        player.x_coordinate -= player.speed;
+                        break;
+                    case "right":
+                        player.x_coordinate += player.speed;
+                        break;
+                    }
+            }
+
             spriteCounter++;
             if (spriteCounter > 15) {
                 spriteNum = (spriteNum == 1) ? 2 : 1;
@@ -48,7 +71,7 @@ public class PlayerHandler {
 
     public void draw(Graphics2D graphics2D) {
         BufferedImage image = null;
-        switch (direction) {
+        switch (player.direction) {
             case "up":
                 if (spriteNum == 1) {
                     image = boy_up_1;
@@ -93,14 +116,14 @@ public class PlayerHandler {
 
     public void getPlayerImage() {
         try {
-            boy_up_1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png")));
-            boy_up_2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/walking/boy_up_2.png")));
-            boy_down_1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/walking/boy_down_1.png")));
-            boy_down_2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/walking/boy_down_2.png")));
-            boy_right_1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/walking/boy_right_1.png")));
-            boy_right_2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/walking/boy_right_2.png")));
-            boy_left_1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/walking/boy_left_1.png")));
-            boy_left_2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/walking/boy_left_2.png")));
+            boy_up_1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            boy_up_2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_2.png"));
+            boy_down_1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_down_1.png"));
+            boy_down_2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_down_2.png"));
+            boy_right_1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_right_1.png"));
+            boy_right_2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_right_2.png"));
+            boy_left_1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_left_1.png"));
+            boy_left_2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_left_2.png"));
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

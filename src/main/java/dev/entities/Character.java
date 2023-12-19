@@ -1,13 +1,21 @@
 package dev.entities;
 
+import java.awt.Rectangle;
+
 public class Character {
     private final int width = 48;
     private final int height = 48;
     protected int hp = 100;
-    protected int x_coordinate;
-    protected int y_coordinate;
+    public int x_coordinate;
+    public int y_coordinate;
     protected boolean isDead = false;
-    protected boolean isCollide = false;
+    public boolean isCollide = false;
+    public int speed;
+
+    public String direction;
+    //public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+    public Rectangle solidArea  = new Rectangle(0, 0, 48, 48);
+    //protected Direction direction = Direction.NONE;
 
     public Character(int x_coordinate, int y_coordinate) {
         this.x_coordinate = x_coordinate;
@@ -42,7 +50,5 @@ public class Character {
         return isCollide;
     }
 
-    public void setCollide(boolean collide) {
-        this.isCollide = collide;
-    }
+    
 }

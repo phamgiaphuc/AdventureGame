@@ -1,4 +1,5 @@
 package dev.entities;
+import java.awt.Rectangle;
 
 public class Player extends Character {
     private String name;
@@ -6,7 +7,7 @@ public class Player extends Character {
     private int score = 0;
     private int energy = 0;
     private int gold = 0;
-    private int speed = 3;
+    public int speed = 3;
     private int shield = 0;
     private int bullet = 50;
     private int total_lives;
@@ -14,9 +15,18 @@ public class Player extends Character {
     private boolean isSpeedUp = false;
     private boolean isShieldExisted = false;
 
+    
+
     public Player(int x_coordinate, int y_coordinate, String name) {
+
         super(x_coordinate, y_coordinate);
         this.name = name;
+
+        solidArea = new Rectangle(16, 8, 32, 32);
+		//solidArea.x = 8;
+		//solidArea.y = 16;
+		//solidArea.width = 32;
+		//solidArea.height = 32;
     }
 
     public void setX(int x_new) {
