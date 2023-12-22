@@ -7,7 +7,6 @@ public class Player extends Character {
     private int score = 0;
     private int energy = 0;
     private int gold = 0;
-    public int speed = 3;
     private int shield = 0;
     private int bullet = 50;
     private int total_lives;
@@ -21,8 +20,8 @@ public class Player extends Character {
 
         super(x_coordinate, y_coordinate);
         this.name = name;
-
-        solidArea = new Rectangle(16, 8, 32, 32);
+        speed = 3;
+        solidArea = new Rectangle(8, 16, 32, 32);
 		//solidArea.x = 8;
 		//solidArea.y = 16;
 		//solidArea.width = 32;

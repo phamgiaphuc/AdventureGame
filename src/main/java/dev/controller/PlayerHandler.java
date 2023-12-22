@@ -28,35 +28,38 @@ public class PlayerHandler {
         if (player_keyHandler.upPressed || player_keyHandler.downPressed || player_keyHandler.leftPressed || player_keyHandler.rightPressed) {
             if (player_keyHandler.upPressed) {
                 player.direction = "up";
-                //player.setY(player.getY() - player.getSpeed());
-            } else if (player_keyHandler.downPressed) {
+
+            }
+            if (player_keyHandler.downPressed) {
                 player.direction = "down";
-                //player.setY(player.getY() + player.getSpeed());
-            } else if (player_keyHandler.rightPressed) {
+
+            }
+            if (player_keyHandler.rightPressed) {
                 player.direction = "right";
-                //player.setX(player.getX() + player.getSpeed());
-            } else if (player_keyHandler.leftPressed){
+
+            }
+            if (player_keyHandler.leftPressed){
                 player.direction = "left";
-                //player.setX(player.getX() - player.getSpeed());
+
             }
             
             
-            player.isCollide = false;
+            player.setCollide(false);
             gh.checker.checkTile(player);
 
-            if(player.isCollide == false){
+            if(player.getCollide() == false){
                 switch (player.direction) {
                     case "up":
-                        player.y_coordinate -= player.speed;
+                        player.setY(player.getY() - player.getSpeed());
                         break;
                     case "down":
-                        player.y_coordinate += player.speed;
+                        player.setY(player.getY() + player.getSpeed());
                         break;
                     case "left":
-                        player.x_coordinate -= player.speed;
+                        player.setX(player.getX() - player.getSpeed());
                         break;
                     case "right":
-                        player.x_coordinate += player.speed;
+                        player.setX(player.getX() + player.getSpeed());
                         break;
                     }
             }
@@ -105,9 +108,12 @@ public class PlayerHandler {
                 }
                 break;
         }
-        graphics2D.setColor(Color.GREEN);
-        graphics2D.fillRect(player.getX(), player.getY(), player.getWidth(), player.getHeight());
+        //graphics2D.setColor(Color.GREEN);
+        //graphics2D.fillRect(player.getX(), player.getY(), player.getWidth(), player.getHeight());
         graphics2D.drawImage(image, player.getX(), player.getY(), player.getWidth(), player.getHeight(), null);
+        graphics2D.setColor(Color.RED);
+        graphics2D.drawRect(player.getX() + player.solidArea.x, player.getY() + player.solidArea.y, 32, 32);
+        //graphics2D.drawRect(player.x_coordinate, player.y_coordinate, 2, 2);
         int labelWidth = graphics2D.getFontMetrics().stringWidth(player.getName());
         int labelX = player.getX() + (player.getWidth() / 2) - (labelWidth / 2);
         int labelY = player.getY() - 10;

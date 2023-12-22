@@ -6,15 +6,15 @@ public class Character {
     private final int width = 48;
     private final int height = 48;
     protected int hp = 100;
-    public int x_coordinate;
-    public int y_coordinate;
+    protected int x_coordinate;
+    protected int y_coordinate;
     protected boolean isDead = false;
-    public boolean isCollide = false;
-    public int speed;
+    protected boolean isCollide = false;
+    protected int speed = 5;
 
     public String direction;
     //public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
-    public Rectangle solidArea  = new Rectangle(0, 0, 48, 48);
+    public Rectangle solidArea;
     //protected Direction direction = Direction.NONE;
 
     public Character(int x_coordinate, int y_coordinate) {
@@ -46,9 +46,22 @@ public class Character {
         this.isDead = dead;
     }
 
-    public boolean isCollide() {
-        return isCollide;
+    public void setCollide(boolean isCollide) {
+        this.isCollide = isCollide;
+    }
+    public boolean getCollide() {
+        return this.isCollide;
     }
 
-    
+    public int getSpeed() {
+        return this.speed;
+    }
+
+    public int getX() {
+        return this.x_coordinate;
+    }
+
+    public int getY() {
+        return this.y_coordinate;
+    }
 }

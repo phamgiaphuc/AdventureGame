@@ -60,6 +60,7 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
         Graphics2D graphics2D = (Graphics2D) g;
         tileHandler.draw(graphics2D);
         playerHandler.draw(graphics2D);
+        
         graphics2D.dispose();
     }
 }

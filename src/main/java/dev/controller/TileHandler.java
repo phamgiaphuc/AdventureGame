@@ -16,11 +16,11 @@ public class TileHandler implements GameConstants {
     public int[][] map;
     
     public TileHandler() {
-       
+
         //int [][] map_1 = map.map_1;
         map =  Map.map_1;
         tile = new Tile[20];
-         getTileImage();
+        getTileImage();
         /*
         for (int i = 0; i < map.map_1.length; i++) {
             for (int j = 0; j < map.map_1[i].length; j++)
@@ -61,8 +61,7 @@ public class TileHandler implements GameConstants {
         for (int i = 0; i < map_1.length; i++) {
             for (int j = 0; j < map_1[i].length; j++) {
                 graphics2D.drawImage(tile[map_1[i][j]].image, j * tileSize, i * tileSize, tileSize, tileSize, null);
-                //System.out.printf("%d ", tile[map.map_1[i][j]]);
-                //System.out.println();
+
             }
         }
     }
