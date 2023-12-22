@@ -2,6 +2,8 @@ package dev.entities;
 
 import java.awt.Rectangle;
 
+import dev.controller.GameHandler;
+
 public class Character {
     private final int width = 48;
     private final int height = 48;
@@ -12,14 +14,15 @@ public class Character {
     protected boolean isCollide = false;
     protected int speed = 5;
 
+    GameHandler gh;
+
     public String direction;
     //public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public Rectangle solidArea;
     //protected Direction direction = Direction.NONE;
 
-    public Character(int x_coordinate, int y_coordinate) {
-        this.x_coordinate = x_coordinate;
-        this.y_coordinate = y_coordinate;
+    public Character(GameHandler gh) {
+            this.gh = gh;
     }
 
     public int getWidth() {

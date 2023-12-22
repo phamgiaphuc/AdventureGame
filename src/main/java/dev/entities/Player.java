@@ -1,6 +1,8 @@
 package dev.entities;
 import java.awt.Rectangle;
 
+import dev.controller.GameHandler;
+
 public class Player extends Character {
     private String name;
     private int level = 1;
@@ -16,9 +18,10 @@ public class Player extends Character {
 
     
 
-    public Player(int x_coordinate, int y_coordinate, String name) {
-
-        super(x_coordinate, y_coordinate);
+    public Player(GameHandler gh, String name) {
+        super(gh);
+        this.x_coordinate = 10;
+        this.y_coordinate = 10;
         this.name = name;
         speed = 3;
         solidArea = new Rectangle(8, 16, 32, 32);

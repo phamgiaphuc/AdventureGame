@@ -16,7 +16,12 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
 
     public KeyHandler keyHandler = new KeyHandler();
     //public Player player = new Player(((maxScreenCol - 1) / 2) * tileSize, ((maxScreenRow - 1) / 2) * tileSize, "Thien");
-    public Player player = new Player(9 * tileSize, 9 * tileSize, "Thien");
+    public Player player = new Player(this, "Thien");
+    //Manage the objects
+    public EntityManager manager = new EntityManager(this);
+
+    // NPC
+    Character bot[] = new Character[10];
     
     public PlayerHandler playerHandler = new PlayerHandler(this, keyHandler, player);
     public TileHandler tileHandler = new TileHandler();
