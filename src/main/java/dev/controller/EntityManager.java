@@ -8,9 +8,13 @@ public class EntityManager {
 
     public EntityManager(GameHandler gh){
         this.gh = gh;
+        
     }
-    public void setNPC(){
-        //gh.bot[0] = new Bot[1];
+
+    public void setNPC(GameHandler gh){
+        gh.bot[0] = new Bot(gh);
+        gh.bot[0].setX(10);
+        gh.bot[0].setY(10);
 
 
     }

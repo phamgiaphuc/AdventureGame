@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import dev.entities.GameConstants;
 import dev.entities.Player;
 
 public class PlayerHandler {
@@ -25,6 +26,7 @@ public class PlayerHandler {
     }
 
     public void update() {
+       
         if (player_keyHandler.upPressed || player_keyHandler.downPressed || player_keyHandler.leftPressed || player_keyHandler.rightPressed) {
             if (player_keyHandler.upPressed) {
                 player.direction = "up";
@@ -40,7 +42,6 @@ public class PlayerHandler {
             }
             if (player_keyHandler.leftPressed){
                 player.direction = "left";
-
             }
             
             
@@ -74,6 +75,14 @@ public class PlayerHandler {
 
     public void draw(Graphics2D graphics2D) {
         BufferedImage image = null;
+        int screenX = gh.player.screenX;
+		int screenY = gh.player.screenY;
+			
+		if(player.getX() + GameConstants.tileSize > gh.player.getX() - gh.player.screenX &&
+		   player.getX() - GameConstants.tileSize < gh.player.getX() + gh.player.screenX &&
+		   player.getY() + GameConstants.tileSize > gh.player.getY() - gh.player.screenY &&
+		   player.getY() - GameConstants.tileSize < gh.player.getY() + gh.player.screenY
+					){
         switch (player.direction) {
             case "up":
                 if (spriteNum == 1) {
@@ -108,16 +117,16 @@ public class PlayerHandler {
                 }
                 break;
         }
-        //graphics2D.setColor(Color.GREEN);
-        //graphics2D.fillRect(player.getX(), player.getY(), player.getWidth(), player.getHeight());
-        graphics2D.drawImage(image, player.getX(), player.getY(), player.getWidth(), player.getHeight(), null);
+
+        graphics2D.drawImage(image, screenY, screenX, player.getWidth(), player.getHeight(), null);
         graphics2D.setColor(Color.RED);
-        graphics2D.drawRect(player.getX() + player.solidArea.x, player.getY() + player.solidArea.y, 32, 32);
-        //graphics2D.drawRect(player.x_coordinate, player.y_coordinate, 2, 2);
+        graphics2D.drawRect(screenY + player.solidArea.x, screenX + player.solidArea.y, 32, 32);
+
         int labelWidth = graphics2D.getFontMetrics().stringWidth(player.getName());
-        int labelX = player.getX() + (player.getWidth() / 2) - (labelWidth / 2);
-        int labelY = player.getY() - 10;
+        int labelX = screenY + (player.getWidth() / 2) - (labelWidth / 2);
+        int labelY = screenX - 10;
         graphics2D.drawString(player.getName(), labelX, labelY);
+    }
     }
 
     public void getPlayerImage() {

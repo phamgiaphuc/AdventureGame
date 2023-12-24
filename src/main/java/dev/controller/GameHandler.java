@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import dev.entities.Bot;
 import dev.entities.GameConstants;
 import dev.entities.Player;
 
@@ -21,10 +22,11 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
     public EntityManager manager = new EntityManager(this);
 
     // NPC
-    Character bot[] = new Character[10];
+    public Bot bot[] = new Bot[10];
     
+
     public PlayerHandler playerHandler = new PlayerHandler(this, keyHandler, player);
-    public TileHandler tileHandler = new TileHandler();
+    public TileHandler tileHandler = new TileHandler(this);
 
     public CollisionChecker checker = new CollisionChecker(this);
 
@@ -37,8 +39,12 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
     }
 
     public void startGameThread() {
+        
         gameThread = new Thread(this);
         gameThread.start();
+        // OBJECTS SETUP
+        manager.setNPC(this);
+
     }
 
     @Override
@@ -64,6 +70,10 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
         tileHandler.draw(graphics2D);
+
+        for(int i = 0; i < bot.length; i++)
+            
+
         playerHandler.draw(graphics2D);
         
         graphics2D.dispose();

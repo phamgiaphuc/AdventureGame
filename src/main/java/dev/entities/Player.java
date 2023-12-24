@@ -15,32 +15,28 @@ public class Player extends Character {
     private boolean isBulletEffect = false;
     private boolean isSpeedUp = false;
     private boolean isShieldExisted = false;
-
+	
+	public final int screenX;
+	public final int screenY;
     
 
     public Player(GameHandler gh, String name) {
-        super(gh);
-        this.x_coordinate = 10;
-        this.y_coordinate = 10;
-        this.name = name;
-        speed = 3;
-        solidArea = new Rectangle(8, 16, 32, 32);
-		//solidArea.x = 8;
-		//solidArea.y = 16;
-		//solidArea.width = 32;
-		//solidArea.height = 32;
-    }
 
-    public void setX(int x_new) {
-        this.x_coordinate = x_new;
+        super(gh);
+
+        this.screenX = GameConstants.screenHeight/2 - (GameConstants.tileSize/2);
+        this.screenY = GameConstants.screenWidth/2 - (GameConstants.tileSize/2);
+
+        this.x_coordinate = 9 * GameConstants.tileSize;
+        this.y_coordinate = 9 * GameConstants.tileSize;
+        this.name = name;
+        speed = 1;
+        solidArea = new Rectangle(8, 16, 32, 32);
+
     }
 
     public int getX() {
         return this.x_coordinate;
-    }
-
-    public void setY(int y_new) {
-        this.y_coordinate = y_new;
     }
 
     public int getY() {

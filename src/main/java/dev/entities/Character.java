@@ -67,4 +67,27 @@ public class Character {
     public int getY() {
         return this.y_coordinate;
     }
+
+    public void setX(int x_new) {
+        this.x_coordinate = x_new;
+    }
+    public void setY(int y_new) {
+        this.y_coordinate = y_new;
+    }
+    /*
+    public void update(){
+        
+        isCollide = false;
+        gh.checker.checkTile(this);
+    
+        if(isCollide == false){
+            switch (direction) {
+                case "up": y_coordinate -= speed; break;
+                case "down": y_coordinate += speed; break;
+                case "left": x_coordinate -= speed; break;
+                case "right": x_coordinate += speed; break;
+            }
+        }
+    }
+    */
 }

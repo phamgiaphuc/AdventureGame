@@ -11,23 +11,20 @@ import dev.entities.Map;
 import dev.entities.Tile;
 
 public class TileHandler implements GameConstants {
-
+    private int count = 0;
+    private final int dem = 17*21;
+    GameHandler gh;
     public Tile[] tile;
     public int[][] map;
     
-    public TileHandler() {
+    public TileHandler(GameHandler gh) {
+        this.gh = gh;
 
         //int [][] map_1 = map.map_1;
         map =  Map.map_1;
         tile = new Tile[20];
         getTileImage();
-        /*
-        for (int i = 0; i < map.map_1.length; i++) {
-            for (int j = 0; j < map.map_1[i].length; j++)
-                System.out.printf("%d ", (tile[map.map_1[i][j]].collision) ? 1 : 0);
-            System.out.println();
-        }
-        */
+
         
 
     }
@@ -57,6 +54,42 @@ public class TileHandler implements GameConstants {
 
 
     public void draw(Graphics2D graphics2D) {
+
+        int col = 0;
+		int row = 0;
+
+        int count = 0;
+        int dem = 17*21;
+
+		while (row < GameConstants.maxScreenRow && col < GameConstants.maxScreenCol && count <= dem) {
+            count ++;
+			int tileNum = map[col][row];
+
+			int worldX = GameConstants.tileSize * col;
+			int worldY = GameConstants.tileSize * row;
+
+			int screenX = worldX - gh.player.getY() + gh.player.screenY;
+			int screenY = worldY - gh.player.getX() + gh.player.screenX;
+
+            if(worldY + GameConstants.tileSize > gh.player.getX() - gh.player.screenY &&
+			    worldY - GameConstants.tileSize < gh.player.getX() + gh.player.screenY &&
+				worldX + GameConstants.tileSize > gh.player.getY() - gh.player.screenX &&
+				worldX - GameConstants.tileSize < gh.player.getY() + gh.player.screenX)
+
+			//graphics2D.drawImage(tile[tileNum].image, screenY, screenX, GameConstants.tileSize, GameConstants.tileSize, null);
+
+            graphics2D.drawImage(tile[tileNum].image, screenY, screenX, GameConstants.tileSize, GameConstants.tileSize, null);
+			
+
+            row++;
+			
+			if(row == GameConstants.maxScreenRow ) {
+				row = 0;
+				col ++;
+			}
+		}
+        
+          /*
         int [][] map_1 = Map.map_1;
         for (int i = 0; i < map_1.length; i++) {
             for (int j = 0; j < map_1[i].length; j++) {
@@ -64,5 +97,11 @@ public class TileHandler implements GameConstants {
 
             }
         }
+        */
+        
+        
+        
+	}
+
     }
-}
+
