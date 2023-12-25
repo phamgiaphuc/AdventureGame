@@ -43,7 +43,7 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
         gameThread = new Thread(this);
         gameThread.start();
         // OBJECTS SETUP
-        manager.setNPC(this);
+        //manager.setNPC(this);
 
     }
 

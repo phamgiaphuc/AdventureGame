@@ -30,7 +30,7 @@ public class Player extends Character {
         this.x_coordinate = 9 * GameConstants.tileSize;
         this.y_coordinate = 9 * GameConstants.tileSize;
         this.name = name;
-        speed = 1;
+        speed = 2;
         solidArea = new Rectangle(8, 16, 32, 32);
 
     }

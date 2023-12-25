@@ -11,8 +11,7 @@ import dev.entities.Map;
 import dev.entities.Tile;
 
 public class TileHandler implements GameConstants {
-    private int count = 0;
-    private final int dem = 17*21;
+
     GameHandler gh;
     public Tile[] tile;
     public int[][] map;
@@ -58,11 +57,8 @@ public class TileHandler implements GameConstants {
         int col = 0;
 		int row = 0;
 
-        int count = 0;
-        int dem = 17*21;
+		while (row < GameConstants.maxScreenRow && col < GameConstants.maxScreenCol) {
 
-		while (row < GameConstants.maxScreenRow && col < GameConstants.maxScreenCol && count <= dem) {
-            count ++;
 			int tileNum = map[col][row];
 
 			int worldX = GameConstants.tileSize * col;
@@ -71,14 +67,16 @@ public class TileHandler implements GameConstants {
 			int screenX = worldX - gh.player.getY() + gh.player.screenY;
 			int screenY = worldY - gh.player.getX() + gh.player.screenX;
 
-            if(worldY + GameConstants.tileSize > gh.player.getX() - gh.player.screenY &&
-			    worldY - GameConstants.tileSize < gh.player.getX() + gh.player.screenY &&
-				worldX + GameConstants.tileSize > gh.player.getY() - gh.player.screenX &&
-				worldX - GameConstants.tileSize < gh.player.getY() + gh.player.screenX)
-
-			//graphics2D.drawImage(tile[tileNum].image, screenY, screenX, GameConstants.tileSize, GameConstants.tileSize, null);
-
-            graphics2D.drawImage(tile[tileNum].image, screenY, screenX, GameConstants.tileSize, GameConstants.tileSize, null);
+            if(worldX + GameConstants.tileSize > gh.player.getY() - gh.player.screenY &&
+			    worldX - GameConstants.tileSize < gh.player.getY() + gh.player.screenY &&
+				worldY + GameConstants.tileSize > gh.player.getX() - gh.player.screenX &&
+				worldY - GameConstants.tileSize < gh.player.getX() + gh.player.screenX
+                )
+            
+			graphics2D.drawImage(tile[tileNum].image, screenY, screenX, GameConstants.tileSize, GameConstants.tileSize, null);
+            //graphics2D.drawImage(tile[tileNum].image, row * GameConstants.tileSize, col * GameConstants.tileSize, GameConstants.tileSize, GameConstants.tileSize, null);
+			
+            //graphics2D.drawImage(tile[tileNum].image, screenY, screenX, GameConstants.tileSize, GameConstants.tileSize, null);
 			
 
             row++;
@@ -88,19 +86,7 @@ public class TileHandler implements GameConstants {
 				col ++;
 			}
 		}
-        
-          /*
-        int [][] map_1 = Map.map_1;
-        for (int i = 0; i < map_1.length; i++) {
-            for (int j = 0; j < map_1[i].length; j++) {
-                graphics2D.drawImage(tile[map_1[i][j]].image, j * tileSize, i * tileSize, tileSize, tileSize, null);
 
-            }
-        }
-        */
-        
-        
-        
 	}
 
     }
