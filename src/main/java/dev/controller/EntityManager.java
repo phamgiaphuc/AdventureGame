@@ -14,7 +14,7 @@ public class EntityManager {
     public void setNPC(GameHandler gh){
         gh.bot[0] = new Bot(gh);
         gh.bot[0].setX(9 * GameConstants.tileSize);
-        gh.bot[0].setY(11 * GameConstants.tileSize);
+        gh.bot[0].setY(9 * GameConstants.tileSize);
         gh.bot[0].direction = "";
 
         gh.bot[1] = new Bot(gh);

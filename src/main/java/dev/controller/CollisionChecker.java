@@ -91,20 +91,21 @@ public class CollisionChecker implements GameConstants {
 
 		for(int i = 0; i < entity.length; i++)
 			if(entity[i] != null){
-				character.solidArea.x += character.getY();
-				character.solidArea.y += character.getX();
-				//character.setSolidAreaX( character.getY() + character.getSolidAreaX() );
-				//character.setSolidAreaY( character.getX() + character.getSolidAreaY() );
+				//character.solidArea.x += character.getY();
+				//character.solidArea.y += character.getX();
+				character.setSolidAreaX( character.getY() + character.getSolidAreaX() );
+				character.setSolidAreaY( character.getX() + character.getSolidAreaY() );
 
-				entity[i].solidArea.x += entity[i].getY();
-				entity[i].solidArea.y += entity[i].getX();
-				//entity[i].setSolidAreaX( entity[i].getY() + entity[i].getSolidAreaX() );
-				//entity[i].setSolidAreaY( entity[i].getX() + entity[i].getSolidAreaY() );
+				//entity[i].solidArea.x += entity[i].getY();
+				//entity[i].solidArea.y += entity[i].getX();
+				entity[i].setSolidAreaX( entity[i].getY() + entity[i].getSolidAreaX() );
+				entity[i].setSolidAreaY( entity[i].getX() + entity[i].getSolidAreaY() );
 
 				switch (character.direction) {
 					case "up":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					character.solidArea.y -= character.getSpeed();
+					//character.solidArea.y -= character.getSpeed();
+					character.setSolidAreaY( character.getSolidAreaY() - character.getSpeed());
 					if(character.solidArea.intersects(entity[i].solidArea) == true){
 							character.setCollide(true);
 							pillar = i;
@@ -112,7 +113,8 @@ public class CollisionChecker implements GameConstants {
 					}
 					case "down":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					character.solidArea.y += character.getSpeed();
+					//character.solidArea.y += character.getSpeed();
+					character.setSolidAreaY( character.getSolidAreaY() + character.getSpeed());
 					if(character.solidArea.intersects(entity[i].solidArea) == true){
 							character.setCollide(true);
 							pillar = i;
@@ -120,7 +122,8 @@ public class CollisionChecker implements GameConstants {
 					}
 					case "left":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					character.solidArea.x -= character.getSpeed();
+					//character.solidArea.x -= character.getSpeed();
+					character.setSolidAreaX( character.getSolidAreaX() - character.getSpeed());
 					if(character.solidArea.intersects(entity[i].solidArea) == true){
 							character.setCollide(true);
 							pillar = i;
@@ -128,7 +131,8 @@ public class CollisionChecker implements GameConstants {
 					}
 					case "right":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					character.solidArea.x += character.getSpeed();
+					//character.solidArea.x += character.getSpeed();
+					character.setSolidAreaX( character.getSolidAreaX() + character.getSpeed());
 					if(character.solidArea.intersects(entity[i].solidArea) == true){
 							character.setCollide(true);
 							pillar = i;
@@ -137,14 +141,14 @@ public class CollisionChecker implements GameConstants {
 				}
 				System.out.println("hello " +character.SolidX + " " + character.SolidY);
 				
-				//character.setSolidAreaX(character.SolidX);
-				//character.setSolidAreaY(character.SolidY);
-				//entity[i].setSolidAreaX(entity[i].SolidX);
-				//entity[i].setSolidAreaY(entity[i].SolidY);
-				character.solidArea.x = character.SolidX;
-				character.solidArea.y = character.SolidY;
-				entity[i].solidArea.x = entity[i].SolidX;
-				entity[i].solidArea.y = entity[i].SolidY;
+				character.setSolidAreaX(character.SolidX);
+				character.setSolidAreaY(character.SolidY);
+				entity[i].setSolidAreaX(entity[i].SolidX);
+				entity[i].setSolidAreaY(entity[i].SolidY);
+				//character.solidArea.x = character.SolidX;
+				//character.solidArea.y = character.SolidY;
+				//entity[i].solidArea.x = entity[i].SolidX;
+				//entity[i].solidArea.y = entity[i].SolidY;
 
 			}
 
@@ -165,7 +169,8 @@ public class CollisionChecker implements GameConstants {
 		switch (entity.direction) {
 					case "up":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					entity.solidArea.y -= entity.getSpeed();
+					//entity.solidArea.y -= entity.getSpeed();
+					entity.setSolidAreaY( entity.getSolidAreaY() - entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
 							System.out.println("hitting");
@@ -173,7 +178,8 @@ public class CollisionChecker implements GameConstants {
 					}
 					case "down":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					entity.solidArea.y += entity.getSpeed();
+					//entity.solidArea.y += entity.getSpeed();
+					entity.setSolidAreaY( entity.getSolidAreaY() + entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
 							System.out.println("hitting");
@@ -181,7 +187,8 @@ public class CollisionChecker implements GameConstants {
 					}
 					case "left":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					entity.solidArea.x -= entity.getSpeed();
+					//entity.solidArea.x -= entity.getSpeed();
+					entity.setSolidAreaX( entity.getSolidAreaX() - entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
 							System.out.println("hitting");
@@ -189,17 +196,22 @@ public class CollisionChecker implements GameConstants {
 					}
 					case "right":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					entity.solidArea.x += entity.getSpeed();
+					//entity.solidArea.x += entity.getSpeed();
+					entity.setSolidAreaX( entity.getSolidAreaX() + entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
 							System.out.println("hitting");
 					break;
 					}
 				}
-				entity.solidArea.x = entity.SolidX;
-				entity.solidArea.y = entity.SolidY;
-				gh.player.solidArea.x = gh.player.SolidX;
-				gh.player.solidArea.y = gh.player.SolidY;
+				//entity.solidArea.x = entity.SolidX;
+				//entity.solidArea.y = entity.SolidY;
+				//gh.player.solidArea.x = gh.player.SolidX;
+				//gh.player.solidArea.y = gh.player.SolidY;
+				entity.setSolidAreaX(entity.SolidX);
+				entity.setSolidAreaY(entity.SolidY);
+				gh.player.setSolidAreaX(gh.player.SolidX);
+				gh.player.setSolidAreaY(gh.player.SolidY);
 
 
 	}

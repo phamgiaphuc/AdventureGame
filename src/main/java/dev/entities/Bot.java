@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import dev.controller.GameHandler;
 
 public class Bot extends Character {
-
+    int count = 0;
     public Bot(GameHandler gh){
         super(gh);
         direction = "down";
@@ -39,7 +39,20 @@ public class Bot extends Character {
         }
     }
     public void setAction(){
+        count ++;
+        if(count <= 25)
         direction = "left";
+        else if(count <= 75){
+            
+        } else if(count <= 150){
+            direction = "right";
+            
+        }else if(count <= 300){
+            direction = "up";
+        }else if(count <= 600){
+            direction = "down";
+            count = 0;
+        }
 
     }
     
