@@ -40,16 +40,16 @@ public class Bot extends Character {
     }
     public void setAction(){
         count ++;
-        if(count <= 25)
+        if(count <= 10)
         direction = "left";
-        else if(count <= 75){
+        else if(count <= 20){
             
-        } else if(count <= 150){
+        } else if(count <= 30){
             direction = "right";
             
-        }else if(count <= 300){
+        }else if(count <= 40){
             direction = "up";
-        }else if(count <= 600){
+        }else if(count <= 50){
             direction = "down";
             count = 0;
         }

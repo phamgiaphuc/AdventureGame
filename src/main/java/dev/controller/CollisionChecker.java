@@ -160,11 +160,15 @@ public class CollisionChecker implements GameConstants {
 		
 
 
-		entity.solidArea.x += entity.getX();
-		entity.solidArea.y += entity.getY();
+		//entity.solidArea.x += entity.getX();
+		entity.setSolidAreaX( entity.getSolidAreaX() + entity.getX());
+		//entity.solidArea.y += entity.getY();
+		entity.setSolidAreaY( entity.getSolidAreaY() + entity.getY());
 
-		gh.player.solidArea.x += gh.player.getX();
-		gh.player.solidArea.y += gh.player.getY();
+		//gh.player.solidArea.x += gh.player.getX();
+		gh.player.setSolidAreaX( gh.player.getSolidAreaX() + gh.player.getX());
+		//gh.player.solidArea.y += gh.player.getY();
+		gh.player.setSolidAreaY( gh.player.getSolidAreaY() + gh.player.getY());
 
 		switch (entity.direction) {
 					case "up":
