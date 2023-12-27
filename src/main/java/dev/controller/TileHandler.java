@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
-import dev.entities.GameConstants;
 import dev.entities.Map;
 import dev.entities.Tile;
 
@@ -19,7 +18,6 @@ public class TileHandler implements GameConstants {
     public TileHandler(GameHandler gh) {
         this.gh = gh;
 
-        //int [][] map_1 = map.map_1;
         map =  Map.map_1;
         tile = new Tile[20];
         getTileImage();
@@ -67,7 +65,7 @@ public class TileHandler implements GameConstants {
 			int screenX = worldX - gh.player.getY() + gh.player.screenY;
 			int screenY = worldY - gh.player.getX() + gh.player.screenX;
 
-            if(worldX + GameConstants.tileSize > gh.player.getY() - gh.player.screenY &&
+            if(worldX+ GameConstants.tileSize > gh.player.getY() - gh.player.screenY &&
 			    worldX - GameConstants.tileSize < gh.player.getY() + gh.player.screenY &&
 				worldY + GameConstants.tileSize > gh.player.getX() - gh.player.screenX &&
 				worldY - GameConstants.tileSize < gh.player.getX() + gh.player.screenX

@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import dev.entities.GameConstants;
 import dev.entities.Player;
 
 public class PlayerHandler {
@@ -44,9 +43,13 @@ public class PlayerHandler {
                 player.direction = "left";
             }
             
-            
+            // CHECK TILE COLLISION
             player.setCollide(false);
             gh.checker.checkTile(player);
+
+            // CHECK BOT COLLISION
+            int botIndex = gh.checker.checkEntity(player, gh.bot);
+            
 
             if(player.getCollide() == false){
                 switch (player.direction) {

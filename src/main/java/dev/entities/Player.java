@@ -1,6 +1,7 @@
 package dev.entities;
 import java.awt.Rectangle;
 
+import dev.controller.GameConstants;
 import dev.controller.GameHandler;
 
 public class Player extends Character {
@@ -27,11 +28,16 @@ public class Player extends Character {
         this.screenX = GameConstants.screenHeight/2 - (GameConstants.tileSize/2);
         this.screenY = GameConstants.screenWidth/2 - (GameConstants.tileSize/2);
 
-        this.x_coordinate = 9 * GameConstants.tileSize;
+        this.x_coordinate = 7 * GameConstants.tileSize;
         this.y_coordinate = 9 * GameConstants.tileSize;
+
+
+
         this.name = name;
-        speed = 2;
+        speed = 3;
         solidArea = new Rectangle(8, 16, 32, 32);
+        SolidX = this.solidArea.x;
+        SolidY = this.solidArea.y;
 
     }
 

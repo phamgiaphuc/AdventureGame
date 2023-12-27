@@ -1,6 +1,5 @@
 package dev.entities;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -8,22 +7,41 @@ import javax.imageio.ImageIO;
 import dev.controller.GameHandler;
 
 public class Bot extends Character {
-        BufferedImage bee1, bee2;
 
     public Bot(GameHandler gh){
         super(gh);
         direction = "down";
-        speed = 7;
-
-        try{
-            bee1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-            bee2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-        }catch(IOException e){
-            
-        }
+        speed = 1;
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
+        setImage();
         
+        SolidX = 8;
+        SolidX = 16;
         //this.x_coordinate = x_coordinate;
         //this.y_coordinate = y_coordinate;
     }
+
+    public void setImage(){
+                try{
+            up1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            //up2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            //down2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            //left2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            //right2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+        }catch(IOException e){
+            
+        }
+    }
+    public void setAction(){
+        direction = "left";
+
+    }
+    
     
 }
