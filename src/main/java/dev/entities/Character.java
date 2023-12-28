@@ -11,13 +11,13 @@ import dev.controller.GameHandler;
 public class Character {
     private final int width = 48;
     private final int height = 48;
-
+    public int index;
     protected int hp = 100;
 
     protected int x_coordinate;
     protected int y_coordinate;
 
-    protected boolean isDead = false;
+    protected boolean isDead = true;
     protected boolean isCollide = false;
 
     protected int speed = 5;
@@ -29,6 +29,7 @@ public class Character {
 
     public String direction;
     public Rectangle solidArea = new Rectangle(8, 16, 32, 32);
+
     public int SolidX, SolidY;
     //public Rectangle solidArea;
 
@@ -109,7 +110,7 @@ public class Character {
         isCollide = false;
         gh.checker.checkTile(this);
 
-        //gh.checker.checkEntity( this, gh.bot);
+        gh.checker.checkEntity( this, gh.bot);
 
         gh.checker.checkPlayer(this);
     
@@ -125,8 +126,8 @@ public class Character {
     
     public void draw(Graphics2D g2){
 		BufferedImage image = null;
-		int screenX = x_coordinate - gh.player.getX() + gh.player.screenX;
-		int screenY = y_coordinate - gh.player.getY() + gh.player.screenY;
+		int screenX = this.getX() - gh.player.getX() + gh.player.screenX;
+		int screenY = this.getY() - gh.player.getY() + gh.player.screenY;
 			
 			if(gh.player.getX() + GameConstants.tileSize > gh.player.getX() - gh.player.screenX &&
 					gh.player.getX() - GameConstants.tileSize < gh.player.getX() + gh.player.screenX &&
@@ -147,9 +148,10 @@ public class Character {
 								image = right1;
 								break;
 							}
+            //if(this.index == -1)System.out.println("tien");
 			g2.drawImage(image, screenX, screenY, GameConstants.tileSize, GameConstants.tileSize, null);
             g2.setColor(Color.RED);
-            g2.drawRect(screenX + solidArea.y,screenY  + solidArea.x, 32, 32);
+            g2.drawRect(screenX + getSolidAreaY(),screenY  + getSolidAreaX(), 32, 32);
 			}
 
 	}

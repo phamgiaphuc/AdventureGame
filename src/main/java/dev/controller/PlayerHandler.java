@@ -120,7 +120,7 @@ public class PlayerHandler {
                 }
                 break;
         }
-
+        System.out.println("thien");
         graphics2D.drawImage(image, screenY, screenX, player.getWidth(), player.getHeight(), null);
         graphics2D.setColor(Color.RED);
         graphics2D.drawRect(screenY + player.solidArea.x, screenX + player.solidArea.y, 32, 32);

@@ -12,14 +12,14 @@ public class Bot extends Character {
         super(gh);
         direction = "down";
         speed = 1;
-        solidArea.x = 8;
-        solidArea.y = 16;
+        solidArea.x = 16;
+        solidArea.y = 8;
         solidArea.width = 32;
         solidArea.height = 32;
         setImage();
         
-        SolidX = 8;
         SolidX = 16;
+        SolidY = 8;
         //this.x_coordinate = x_coordinate;
         //this.y_coordinate = y_coordinate;
     }
@@ -44,17 +44,17 @@ public class Bot extends Character {
         direction = "left";
         else if(count <= 20){
             
-        } else if(count <= 30){
+        } else if(count <= 40){
             direction = "right";
             
-        }else if(count <= 40){
+        }else if(count <= 80){
             direction = "up";
-        }else if(count <= 50){
-            direction = "down";
+        }else if(count <= 160){
+           direction = "down";
             count = 0;
         }
 
-    }
+     }
     
     
 }

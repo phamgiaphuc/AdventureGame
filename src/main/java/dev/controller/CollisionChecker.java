@@ -46,7 +46,7 @@ public class CollisionChecker implements GameConstants {
 			TopRow = (TopY - character.getSpeed())/tileSize;
 			tileNum1 = gh.tileHandler.map[TopRow][LeftCol];
 			tileNum2 = gh.tileHandler.map[TopRow][RightCol];
-			System.out.println(TopRow + " " + LeftCol + " " + TopRow + " " + RightCol);
+			//System.out.println(TopRow + " " + LeftCol + " " + TopRow + " " + RightCol);
 				if(gh.tileHandler.tile[tileNum1].collision == true || gh.tileHandler.tile[tileNum2].collision == true )
 					character.setCollide(true);
 			break;
@@ -83,14 +83,15 @@ public class CollisionChecker implements GameConstants {
 		
 		int pillar = 1000;
 
-		character.solidArea.x += character.getX();
-		character.solidArea.y += character.getY();
+		// character.solidArea.x += character.getX();
+		// character.solidArea.y += character.getY();
 
-		gh.player.solidArea.x += gh.player.getX();
-		gh.player.solidArea.y += gh.player.getY();
+		// gh.player.solidArea.x += gh.player.getX();
+		// gh.player.solidArea.y += gh.player.getY();
 
-		for(int i = 0; i < entity.length; i++)
-			if(entity[i] != null){
+		for(int i = 0; i < entity.length; i++){
+
+			if(entity[i] != null && character.index != entity[i].index){
 				//character.solidArea.x += character.getY();
 				//character.solidArea.y += character.getX();
 				character.setSolidAreaX( character.getY() + character.getSolidAreaX() );
@@ -139,12 +140,13 @@ public class CollisionChecker implements GameConstants {
 					break;
 					}
 				}
-				System.out.println("hello " +character.SolidX + " " + character.SolidY);
-				
+				//System.out.println("hello " +character.SolidX + " " + character.SolidY);
+			
 				character.setSolidAreaX(character.SolidX);
 				character.setSolidAreaY(character.SolidY);
 				entity[i].setSolidAreaX(entity[i].SolidX);
 				entity[i].setSolidAreaY(entity[i].SolidY);
+			}
 				//character.solidArea.x = character.SolidX;
 				//character.solidArea.y = character.SolidY;
 				//entity[i].solidArea.x = entity[i].SolidX;

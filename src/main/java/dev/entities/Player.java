@@ -31,7 +31,7 @@ public class Player extends Character {
         this.x_coordinate = 7 * GameConstants.tileSize;
         this.y_coordinate = 9 * GameConstants.tileSize;
 
-
+        
 
         this.name = name;
         speed = 3;

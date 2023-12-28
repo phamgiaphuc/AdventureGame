@@ -7,6 +7,6 @@ public interface GameConstants {
     int maxScreenCol = 25;
     int maxScreenRow = 21;
     int screenWidth = 17 * tileSize;
-    int screenHeight = 17 * tileSize;
+    int screenHeight = 17  * tileSize;
     public boolean collision = false;
 }

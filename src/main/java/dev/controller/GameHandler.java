@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import dev.entities.Character;
+import dev.entities.Item;
 import dev.entities.Player;
 
 public class GameHandler extends JPanel implements Runnable, GameConstants {
@@ -16,18 +17,24 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
 
     public KeyHandler keyHandler = new KeyHandler();
     //public Player player = new Player(((maxScreenCol - 1) / 2) * tileSize, ((maxScreenRow - 1) / 2) * tileSize, "Thien");
+    
     public Player player = new Player(this, "Thien");
+    
     //Manage the objects
     public EntityManager manager = new EntityManager(this);
 
     // NPC
     public Character bot[] = new Character[10];
     
+    // Item
+    public Item item[] = new Item[10];
+    
 
     public PlayerHandler playerHandler = new PlayerHandler(this, keyHandler, player);
     public TileHandler tileHandler = new TileHandler(this);
 
     public CollisionChecker checker = new CollisionChecker(this);
+
 
     public GameHandler() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -44,6 +51,7 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
 
         // OBJECTS SETUP
         manager.setNPC(this);
+        manager.setItem(this);
 
     }
 
@@ -82,6 +90,12 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
         for(int i = 0; i < bot.length; i++)
             if(bot[i] != null)
                 bot[i].draw(graphics2D);
+        // Item
+        /*
+        for(int i = 0; i <item.length; i++)
+            if(item[i] != null)
+                item[i].draw(this, graphics2D);
+        */
         // PLAYER
         playerHandler.draw(graphics2D);
         
