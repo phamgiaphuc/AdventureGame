@@ -4,10 +4,15 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import dev.controller.GameConstants;
 import dev.controller.GameHandler;
 
 public class Bot extends Character {
     int count = 0;
+
+    int l[] = {0, 0, -1, 1};
+    int r[] = {-1, 1, 0, 0};
+
     public Bot(GameHandler gh){
         super(gh);
         direction = "down";
@@ -38,7 +43,33 @@ public class Bot extends Character {
             
         }
     }
+    public void trespassing(){
+        int x1 = this.Regionx * GameConstants.tileSize;
+        int y1 = this.Regiony * GameConstants.tileSize;
+
+        int x2 = this.Regionx * GameConstants.tileSize;
+        int y2 = (this.Regiony + this.heig) * GameConstants.tileSize;
+
+        int x3 = (this.Regionx +this.wid) * GameConstants.tileSize;
+        int y3 = this.Regiony * GameConstants.tileSize;
+
+        int x4 = (this.Regionx +this.wid) * GameConstants.tileSize;
+        int y4 = (this.Regiony + this.heig) * GameConstants.tileSize;
+        
+        int X = this.getY();
+        int Y = this.getX();
+        // int X = gh.player.getY();
+        // int Y = gh.player.getX();
+        System.out.println("cor " + X/48 + " " + Y/48);
+        System.out.println(x1/48 + " " + y1/48 + "     " + x2/48 + " " + y2/48);
+        System.out.println(x3/48 + " " + y3/48 + "     " + x4/48 + " " + y4/48);
+
+    }
+
     public void setAction(){
+
+        // trespassing();
+        //direction = "down";
         count ++;
         if(count <= 10)
         direction = "left";

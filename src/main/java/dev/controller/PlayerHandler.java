@@ -49,7 +49,7 @@ public class PlayerHandler {
 
             // CHECK BOT COLLISION
             int botIndex = gh.checker.checkEntity(player, gh.bot);
-            
+            System.out.println(botIndex);
 
             if(player.getCollide() == false){
                 switch (player.direction) {

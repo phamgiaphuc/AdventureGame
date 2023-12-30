@@ -12,13 +12,13 @@ import dev.entities.Item;
 import dev.entities.Player;
 
 public class GameHandler extends JPanel implements Runnable, GameConstants {
-
-    Thread gameThread = null;
+    
+Thread gameThread = null;
 
     public KeyHandler keyHandler = new KeyHandler();
     //public Player player = new Player(((maxScreenCol - 1) / 2) * tileSize, ((maxScreenRow - 1) / 2) * tileSize, "Thien");
     
-    public Player player = new Player(this, "Thien");
+    public Player player = new Player(this, keyHandler, "Thien");
     
     //Manage the objects
     public EntityManager manager = new EntityManager(this);
@@ -30,7 +30,7 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
     public Item item[] = new Item[10];
     
 
-    public PlayerHandler playerHandler = new PlayerHandler(this, keyHandler, player);
+    //public PlayerHandler playerHandler = new PlayerHandler(this, keyHandler, player);
     public TileHandler tileHandler = new TileHandler(this);
 
     public CollisionChecker checker = new CollisionChecker(this);
@@ -40,7 +40,7 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
-        this.addKeyListener(playerHandler.player_keyHandler);
+        this.addKeyListener(keyHandler);
         this.setFocusable(true);
     }
 
@@ -73,7 +73,8 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
 
     public void update() {
         //PLAYER
-        playerHandler.update();
+
+        player.update();
 
         //NPC
         for(int i = 0; i < bot.length; i++)
@@ -97,7 +98,8 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
                 item[i].draw(this, graphics2D);
         */
         // PLAYER
-        playerHandler.draw(graphics2D);
+        //playerHandler.draw(graphics2D);
+        player.draw(graphics2D);
         
         graphics2D.dispose();
     }

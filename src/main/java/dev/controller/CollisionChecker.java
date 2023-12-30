@@ -19,13 +19,13 @@ public class CollisionChecker implements GameConstants {
 		int RightX = character.getX() +character.solidArea.x + character.solidArea.width;
 		int TopY = character.getY() + character.solidArea.y;
 		int BottomY = character.getY() + character.solidArea.y + character.solidArea.height;
-        
+
         left = LeftX;
         right = RightX;
         top = TopY;
         bot = BottomY;
 
-        /*
+/*
 		int LeftX = character.getX() + character.solidArea.x;
 		int RightX = character.getX() +character.solidArea.x  + character.solidArea.width;
 		int TopY = character.getY() + character.solidArea.y;
@@ -94,13 +94,13 @@ public class CollisionChecker implements GameConstants {
 			if(entity[i] != null && character.index != entity[i].index){
 				//character.solidArea.x += character.getY();
 				//character.solidArea.y += character.getX();
-				character.setSolidAreaX( character.getY() + character.getSolidAreaX() );
-				character.setSolidAreaY( character.getX() + character.getSolidAreaY() );
+				character.setSolidAreaX( character.getX() + character.getSolidAreaX() );
+				character.setSolidAreaY( character.getY() + character.getSolidAreaY() );
 
 				//entity[i].solidArea.x += entity[i].getY();
 				//entity[i].solidArea.y += entity[i].getX();
-				entity[i].setSolidAreaX( entity[i].getY() + entity[i].getSolidAreaX() );
-				entity[i].setSolidAreaY( entity[i].getX() + entity[i].getSolidAreaY() );
+				entity[i].setSolidAreaX( entity[i].getX() + entity[i].getSolidAreaX() );
+				entity[i].setSolidAreaY( entity[i].getY() + entity[i].getSolidAreaY() );
 
 				switch (character.direction) {
 					case "up":
@@ -110,8 +110,8 @@ public class CollisionChecker implements GameConstants {
 					if(character.solidArea.intersects(entity[i].solidArea) == true){
 							character.setCollide(true);
 							pillar = i;
-					break;
 					}
+					break;
 					case "down":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
 					//character.solidArea.y += character.getSpeed();
@@ -119,8 +119,8 @@ public class CollisionChecker implements GameConstants {
 					if(character.solidArea.intersects(entity[i].solidArea) == true){
 							character.setCollide(true);
 							pillar = i;
-					break;
 					}
+					break;
 					case "left":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
 					//character.solidArea.x -= character.getSpeed();
@@ -128,8 +128,8 @@ public class CollisionChecker implements GameConstants {
 					if(character.solidArea.intersects(entity[i].solidArea) == true){
 							character.setCollide(true);
 							pillar = i;
-					break;
 					}
+					break;
 					case "right":
 					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
 					//character.solidArea.x += character.getSpeed();
@@ -137,8 +137,9 @@ public class CollisionChecker implements GameConstants {
 					if(character.solidArea.intersects(entity[i].solidArea) == true){
 							character.setCollide(true);
 							pillar = i;
-					break;
+					
 					}
+					break;
 				}
 				//System.out.println("hello " +character.SolidX + " " + character.SolidY);
 			

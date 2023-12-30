@@ -9,18 +9,25 @@ import dev.controller.GameConstants;
 import dev.controller.GameHandler;
 
 public class Character {
-    private final int width = 48;
+    public final int width = 48;
     private final int height = 48;
     public int index;
-    protected int hp = 100;
+    public int hp = 100;
 
-    protected int x_coordinate;
-    protected int y_coordinate;
+    public int x_coordinate;
+    public int y_coordinate;
 
-    protected boolean isDead = true;
-    protected boolean isCollide = false;
+    //NPC ZONE
+    public int Regionx;
+    public int Regiony;
+    public int wid;
+    public int heig;
+    
 
-    protected int speed = 5;
+    public boolean isDead = true;
+    public boolean isCollide = false;
+
+    public int speed = 5;
 
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;

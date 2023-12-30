@@ -17,12 +17,21 @@ public class EntityManager {
         gh.bot[0].setY(9 * GameConstants.tileSize);
         gh.bot[0].direction = "right";
         gh.bot[0].index = 0;
+        gh.bot[0].Regionx = 6;
+        gh.bot[0].Regiony = 8;
+        gh.bot[0].wid = 3;
+        gh.bot[0].heig = 4;
+
 
         gh.bot[1] = new Bot(gh);
         gh.bot[1].setX(10 * GameConstants.tileSize);
         gh.bot[1].setY(9 * GameConstants.tileSize);
         gh.bot[1].direction = "left";
         gh.bot[1].index = 1;
+        gh.bot[1].Regionx = 6;
+        gh.bot[1].Regiony = 8;
+        gh.bot[1].wid = 3;
+        gh.bot[1].heig = 4;
 
     }
 
