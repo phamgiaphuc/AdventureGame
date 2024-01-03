@@ -92,13 +92,12 @@ Thread gameThread = null;
             if(bot[i] != null)
                 bot[i].draw(graphics2D);
         // Item
-        /*
+
         for(int i = 0; i <item.length; i++)
             if(item[i] != null)
                 item[i].draw(this, graphics2D);
-        */
+        
         // PLAYER
-        //playerHandler.draw(graphics2D);
         player.draw(graphics2D);
         
         graphics2D.dispose();

@@ -45,7 +45,7 @@ public class Player extends Character {
         this.y_coordinate = 9 * GameConstants.tileSize;
 
         this.name = name;
-        speed = 3;
+        speed = 2;
         solidArea = new Rectangle(8, 16, 32, 32);
         SolidX = this.solidArea.x;
         SolidY = this.solidArea.y;
@@ -89,7 +89,9 @@ public class Player extends Character {
             this.setCollide(false);
             gh.checker.checkTile(this);
 
-            gh.checker.checkEntity(this, gh.bot);
+            int indexItem = gh.checker.checkItem(this, true);
+
+            int indexEntity = gh.checker.checkEntity(this, gh.bot);
     
             if(this.getCollide() == false){
                 switch (direction) {
@@ -153,7 +155,7 @@ public class Player extends Character {
                 //g2.drawImage(image, screenX, screenY, null);
         graphics2D.drawImage(image, screenY, screenX, this.getWidth(), this.getHeight(), null);
         graphics2D.setColor(Color.RED);
-        graphics2D.drawRect(screenY + this.solidArea.x, screenX + this.solidArea.y, 32, 32);
+        graphics2D.drawRect(screenY +8, screenX + 16, 32, 32);
 
         int labelWidth = graphics2D.getFontMetrics().stringWidth(this.getName());
         int labelX = screenY + (this.getWidth() / 2) - (labelWidth / 2);

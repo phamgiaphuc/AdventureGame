@@ -1,6 +1,7 @@
 package dev.entities;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -9,20 +10,77 @@ import dev.controller.GameHandler;
 
 public class Bot extends Character {
     int count = 0;
+    // MAP
+    public Tile[] tile;
+    public int[][] map;
+    //int dem = -1;
 
-    int l[] = {0, 0, -1, 1};
+    //GameHandler gh;
+    public boolean hitPlayer;
+    private int directionX, directionY;
+    public boolean ok = false;
+    public boolean zone = false;
+    public int[][] territory;
+    int fix;
+    // path
+    public int[] path;
+    public int[] f_path;
+
+    public int[][] check;
+    
+    //player
+    public int playerX, playerY;
+    public int botX, botY;
+
+    public int num = -1;
+
+    int time =0;
     int r[] = {-1, 1, 0, 0};
+    int l[] = {0, 0, -1, 1};
+
+    int x1;
+    int y1;
+    int x2;
+    int y2;
+    int x3;
+    int y3;
+    int x4;
+    int y4;
+    /*
+    0 : left
+    1 : right
+    2 : up
+    3 : down
+     */
+    int X;
+    int Y;
 
     public Bot(GameHandler gh){
+        
         super(gh);
+        // PLAYER
+
+        map =  Map.map_1;
         direction = "down";
         speed = 1;
+        // SIZE
+        // solidArea.x = 0;
+        // solidArea.y = 0;
+        // solidArea.width = 48;
+        // solidArea.height = 48;
         solidArea.x = 16;
         solidArea.y = 8;
         solidArea.width = 32;
         solidArea.height = 32;
         setImage();
-        
+
+        // ACTIVE ZONE
+        check = new int[100][100];
+
+        path = new int[1000];
+        f_path = new int[1000];
+
+        territory = new int[80][80];
         SolidX = 16;
         SolidY = 8;
         //this.x_coordinate = x_coordinate;
@@ -44,48 +102,209 @@ public class Bot extends Character {
         }
     }
     public void trespassing(){
-        int x1 = this.Regionx * GameConstants.tileSize;
-        int y1 = this.Regiony * GameConstants.tileSize;
+        //  x1 = this.Regionx * GameConstants.tileSize;
+        //  y1 = this.Regiony * GameConstants.tileSize;
 
-        int x2 = this.Regionx * GameConstants.tileSize;
-        int y2 = (this.Regiony + this.heig) * GameConstants.tileSize;
+        //  x2 = this.Regionx * GameConstants.tileSize;
+        //  y2 = (this.Regiony + this.heig) * GameConstants.tileSize;
 
-        int x3 = (this.Regionx +this.wid) * GameConstants.tileSize;
-        int y3 = this.Regiony * GameConstants.tileSize;
+        //  x3 = (this.Regionx +this.wid) * GameConstants.tileSize;
+        //  y3 = this.Regiony * GameConstants.tileSize;
 
-        int x4 = (this.Regionx +this.wid) * GameConstants.tileSize;
-        int y4 = (this.Regiony + this.heig) * GameConstants.tileSize;
-        
-        int X = this.getY();
-        int Y = this.getX();
-        // int X = gh.player.getY();
-        // int Y = gh.player.getX();
-        System.out.println("cor " + X/48 + " " + Y/48);
-        System.out.println(x1/48 + " " + y1/48 + "     " + x2/48 + " " + y2/48);
-        System.out.println(x3/48 + " " + y3/48 + "     " + x4/48 + " " + y4/48);
+        //  x4 = (this.Regionx +this.wid) * GameConstants.tileSize;
+        //  y4 = (this.Regiony + this.heig) * GameConstants.tileSize;
+        x1 = this.Regionx;
+         y1 = this.Regiony;
 
-    }
+         x2 = this.Regionx;
+         y2 = (this.Regiony + this.heig);
 
-    public void setAction(){
+         x3 = (this.Regionx +this.wid);
+         y3 = this.Regiony;
 
-        // trespassing();
-        //direction = "down";
-        count ++;
-        if(count <= 10)
-        direction = "left";
-        else if(count <= 20){
-            
-        } else if(count <= 40){
-            direction = "right";
-            
-        }else if(count <= 80){
-            direction = "up";
-        }else if(count <= 160){
-           direction = "down";
-            count = 0;
+         x4 = (this.Regionx +this.wid);
+         y4 = (this.Regiony + this.heig);
+
+        // PLAYER COORDINATE
+         X = (gh.player.getY() + gh.player.solidArea.x) / GameConstants.tileSize;
+         Y = (gh.player.getX()+ gh.player.solidArea.y) / GameConstants.tileSize;
+         //X = (gh.player.getY() + gh.player.solidArea.x) / GameConstants.tileSize;
+         //Y = (gh.player.getX()+ gh.player.solidArea.y) / GameConstants.tileSize;
+
+        if( y1 <= Y && Y <= y2 && x1 <= X && X <= x3 ){
+            this.zone = true;
+            System.out.println("zone");
+        }
+        else{
+            this.zone = false;
+            // fix = 0;
+            // ok = false;
+            System.out.println("out zone");
         }
 
-     }
+    }
+// public void dfs(int x, int y,int playerX, int playerY, int res){
+
+//         if(x == playerX && y == playerY){
+//             if(fix >= res  || ok == false){
+//                 ok = true;
+//                 fix = res;
+//                 for(int k = 0; k < fix; k ++)
+//                     f_path[k] = path[k];
+//             }
+//             return;
+//         }
+
+//         //move();
+
+//         System.out.println(x + "  " + y);
+//         if( x < 0 || x >= this.wid  || y < 0 || y >= this.heig )
+//             return;
+//         if(check[x][y] == 1)
+//             return;
+
+//         for(int i = 0; i < 4; i++){
+//             if(x + r[i] >= 0 && x + r[i] < this.wid && y + l[i] >= 0 && y + l[i] < this.heig)
+//                 if(territory[x + r[i]][y + l[i]] != 1){
+//                     path[res] = i;
+//                     check[x][y] = 1;
+//                     // if(i == 0) this.direction = "left";
+//                     // if(i == 1) this.direction = "right";
+//                     // if(i == 2) this.direction = "up";
+//                     // if(i == 3) this.direction = "down";
+//                     playerX = gh.player.getY() / GameConstants.tileSize;
+//                     playerY = gh.player.getX() / GameConstants.tileSize;
+//                     //move();
+//                     dfs(x + r[i], y + l[i], playerX, playerY, res +1);
+//                     check[x][y] = 0;
+
+//                 }
+//         }
+//     }
+
+public void attack(){
+     botX = (this.getY() + this.solidArea.x);
+     botY = (this.getX() + this.solidArea.y);
+     playerX = gh.player.getY() + gh.player.solidArea.x;
+     playerY = gh.player.getX() + gh.player.solidArea.y;
+    //int botX = this.getX() / GameConstants.tileSize;
+    //int botY = this.getY() / GameConstants.tileSize;
+    // System.out.println("start:" + botX + "  " + botY);
+    //dfs(botX, botY, playerX, playerY, 0);
+
+    // for(int i = 0; i < fix; i++)
+    //     System.out.printf("%d ", f_path[i]);
+        //System.out.println(" hello");
+
+}
+
+// public void zone(){
+//         //ACTIVE ZONE
+//         int x = this.Regionx;
+//         int y = this.Regiony;
+
+//     // for(int i = 0;i < wid; i++)
+//     //     for(int j = 0; j < heig; j++){
+//     //         territory[x + i][y +j] = (gh.tileHandler.tile[gh.tileHandler.map[x + i][y + j]].collision) ? 1 : 0;
+//     //         check[x + i][y +j] = 0;
+//     //     }
+
+
+// }
+public void tracking(){
+        //Random number = new Random();
+        //int t = number.nextInt(2);
+        directionX = playerX - botX;
+        directionY = playerY - botY;
+
+    //if(!directionX){
+        {
+    if( directionX > 8)
+        this.direction = "down";
+        else    if(directionY < 0)
+        this.direction = "left";
+    else if(directionX < 0)
+        this.direction = "up";
+    else {
+
+
+     if(directionY > 8)
+        this.direction = "right";
+
+    }
+    }
+
+//}
+}
+
+public void setAction(){
+
+    //direction = "down";
+    //zone();
+    trespassing();
+    if(this.zone == true){
+        attack();
+        tracking();
+        System.out.println(direction);
+        move();
+    }
+    else{
+        time ++;
+        if(time == 25){
+        Random rand = new Random();
+        count = rand.nextInt(40);
+        if(count <= 10)
+            direction = "left";
+        else if(count > 10 && count <= 20){
+            direction = "right";
+        }else if(count > 20 && count <= 30){
+            direction = "up";
+        }else if(count >= 30){
+           direction = "down";
+        }
+        time = 0;
+        }
+        //move();
+    }
+    }
+    public void update(){
+        //System.out.println("begin");
+        setAction();
+    }
+
+    // public void checkDirection(int i){
+    //     if(i == 0)direction = "left";
+    //     if(i == 1)direction = "right";
+    //     if(i == 2)direction = "up";
+    //     if(i == 3)direction = "down";
+    // }
+
+    public void move(){
+        //if(ok == true){
+
+        //num ++;
+        //checkDirection(f_path[num]);
+        //for(int i = 0 ; i <= 1; i++){
+        isCollide = false;
+        gh.checker.checkTile(this);
+
+        gh.checker.checkEntity( this, gh.bot);
+        
+        gh.checker.checkPlayer(this);
+        
     
+        if(this.isCollide == false){
+            switch (this.direction) {
+                case "up": this.setY(y_coordinate - speed); break;
+                case "down": this.setY(y_coordinate + speed); break;
+                case "left": this.setX(x_coordinate - speed); break;
+                case "right": this.setX(x_coordinate + speed); break;
+            }
+        }
+        //this.draw(graphics2D);
+    //}
+    //}
+    }
+
     
 }

@@ -112,14 +112,16 @@ public class Character {
 
     public void update(){
         
+        
         setAction();
 
         isCollide = false;
         gh.checker.checkTile(this);
 
         gh.checker.checkEntity( this, gh.bot);
-
+        
         gh.checker.checkPlayer(this);
+        
     
         if(this.isCollide == false){
             switch (this.direction) {
