@@ -15,7 +15,7 @@ public class Door extends Item {
         SolidY = this.solidArea.y;
         this.gh = gh;
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
         } catch (IOException e) {
             
         }

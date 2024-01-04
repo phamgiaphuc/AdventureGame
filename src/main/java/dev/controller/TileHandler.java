@@ -44,6 +44,8 @@ public class TileHandler implements GameConstants {
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tile/grass00.png")));
             tile[3].collision = false;
+
+            
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

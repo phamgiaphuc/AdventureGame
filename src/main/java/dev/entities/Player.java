@@ -57,14 +57,18 @@ public class Player extends Character {
     }
         public void getPlayerImage() {
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_down_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_right_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_left_2.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_2.png"));
+            up3 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_3.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_down_1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_down_2.png"));
+            down3 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_down_3.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_right_1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_right_2.png"));
+            right3 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_right_3.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_left_1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_left_2.png"));
+            left3 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_left_3.png"));
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -107,10 +111,18 @@ public class Player extends Character {
                 }
             }
             spriteCounter++;
-            if (spriteCounter > 15) {
-                spriteNum = (spriteNum == 1) ? 2 : 1;
-                spriteCounter = 0;
-            }
+            //if (spriteCounter > 15) {
+                // spriteNum = (spriteNum == 1) ? 2 : 1;
+                // spriteCounter = 0;
+                if(spriteCounter >=0 && spriteCounter <=6)
+                    spriteNum = 1;
+                else if(spriteCounter > 6 && spriteCounter <= 10)
+                    spriteNum = 2;
+                else if(spriteCounter > 10 && spriteCounter <= 16)
+                    spriteNum = 3;
+                else
+                    spriteCounter = 0;
+            //}
         }
         
         }
@@ -125,6 +137,8 @@ public class Player extends Character {
                     if (spriteNum == 2) {
                         image = up2;
                     }
+                    if(spriteNum == 3)
+                        image = up3;
                     break;
                 case "down":
                     if (spriteNum == 1) {
@@ -133,6 +147,8 @@ public class Player extends Character {
                     if (spriteNum == 2) {
                         image = down2;
                     }
+                    if(spriteNum == 3)
+                        image = down3;
                     break;
                 case "left":
                     if (spriteNum == 1) {
@@ -141,6 +157,9 @@ public class Player extends Character {
                     if (spriteNum == 2) {
                         image = left2;
                     }
+                    if(spriteNum == 3)
+                        image = left3;
+
                     break;
                 case "right":
                     if (spriteNum == 1) {
@@ -149,11 +168,13 @@ public class Player extends Character {
                     if (spriteNum == 2) {
                         image = right2;
                     }
+                    if(spriteNum == 3)
+                        image = right3;
                     break;
         
                 }
                 //g2.drawImage(image, screenX, screenY, null);
-        graphics2D.drawImage(image, screenY, screenX, this.getWidth(), this.getHeight(), null);
+        graphics2D.drawImage(image, screenY, screenX, this.getWidth() *2 , this.getHeight() * 2 , null);
         graphics2D.setColor(Color.RED);
         graphics2D.drawRect(screenY +8, screenX + 16, 32, 32);
 

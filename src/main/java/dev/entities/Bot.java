@@ -89,14 +89,14 @@ public class Bot extends Character {
 
     public void setImage(){
                 try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-            //up2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-            //down2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-            //left2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
-            //right2 = ImageIO.read(getClass().getResourceAsStream("/images/player/walking/boy_up_1.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            //up2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            //down2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            //left2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            //right2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
         }catch(IOException e){
             
         }
