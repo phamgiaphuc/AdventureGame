@@ -30,19 +30,19 @@ public class TileHandler implements GameConstants {
         try {
             
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tile/wall.png")));
+            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("../resources/images/tile/wall.png")));
             tile[0].collision = true;
             
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tile/road00.png")));
+            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("../resources/images/tile/road00.png")));
             tile[1].collision = false;
             
             tile[2] = new Tile();
-            tile[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tile/tree.png")));
+            tile[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("../resources/images/tile/tree.png")));
             tile[2].collision = true;
             
             tile[3] = new Tile();
-            tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tile/grass00.png")));
+            tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("../resources/images/tile/grass00.png")));
             tile[3].collision = false;
 
             

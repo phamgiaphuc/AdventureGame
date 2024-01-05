@@ -89,45 +89,35 @@ public class Bot extends Character {
 
     public void setImage(){
                 try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
             //up2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
             //down2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
             //left2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
             //right2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
         }catch(IOException e){
             
         }
     }
     public void trespassing(){
-        //  x1 = this.Regionx * GameConstants.tileSize;
-        //  y1 = this.Regiony * GameConstants.tileSize;
+         x1 = this.Regionx * GameConstants.tileSize;
+         y1 = this.Regiony * GameConstants.tileSize;
 
-        //  x2 = this.Regionx * GameConstants.tileSize;
-        //  y2 = (this.Regiony + this.heig) * GameConstants.tileSize;
+         x2 = this.Regionx * GameConstants.tileSize;
+         y2 = (this.Regiony + this.heig) * GameConstants.tileSize;
 
-        //  x3 = (this.Regionx +this.wid) * GameConstants.tileSize;
-        //  y3 = this.Regiony * GameConstants.tileSize;
+         x3 = (this.Regionx +this.wid) * GameConstants.tileSize;
+         y3 = this.Regiony * GameConstants.tileSize;
 
-        //  x4 = (this.Regionx +this.wid) * GameConstants.tileSize;
-        //  y4 = (this.Regiony + this.heig) * GameConstants.tileSize;
-        x1 = this.Regionx;
-         y1 = this.Regiony;
+         x4 = (this.Regionx +this.wid) * GameConstants.tileSize;
+         y4 = (this.Regiony + this.heig) * GameConstants.tileSize;
 
-         x2 = this.Regionx;
-         y2 = (this.Regiony + this.heig);
-
-         x3 = (this.Regionx +this.wid);
-         y3 = this.Regiony;
-
-         x4 = (this.Regionx +this.wid);
-         y4 = (this.Regiony + this.heig);
 
         // PLAYER COORDINATE
-         X = (gh.player.getY() + gh.player.solidArea.x) / GameConstants.tileSize;
-         Y = (gh.player.getX()+ gh.player.solidArea.y) / GameConstants.tileSize;
+         X = (gh.player.getY() );
+         Y = (gh.player.getX());
          //X = (gh.player.getY() + gh.player.solidArea.x) / GameConstants.tileSize;
          //Y = (gh.player.getX()+ gh.player.solidArea.y) / GameConstants.tileSize;
 
@@ -141,6 +131,17 @@ public class Bot extends Character {
             // ok = false;
             System.out.println("out zone");
         }
+        x1 = this.Regionx;
+         y1 = this.Regiony;
+
+         x2 = this.Regionx;
+         y2 = (this.Regiony + this.heig);
+
+         x3 = (this.Regionx +this.wid);
+         y3 = this.Regiony;
+
+         x4 = (this.Regionx +this.wid);
+         y4 = (this.Regiony + this.heig);
 
     }
 // public void dfs(int x, int y,int playerX, int playerY, int res){
