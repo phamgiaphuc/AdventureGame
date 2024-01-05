@@ -15,7 +15,11 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
     
 Thread gameThread = null;
 
-    public KeyHandler keyHandler = new KeyHandler();
+    public int gameStatus = 0;
+
+    public KeyHandler keyHandler = new KeyHandler(this);
+
+    public PanelManager panel = new PanelManager(this);
     //public Player player = new Player(((maxScreenCol - 1) / 2) * tileSize, ((maxScreenRow - 1) / 2) * tileSize, "Thien");
     
     public Player player = new Player(this, keyHandler, "Thien");
@@ -45,14 +49,14 @@ Thread gameThread = null;
     }
 
     public void startGameThread() {
-        
+        if(this.gameStatus == 0){
         gameThread = new Thread(this);
         gameThread.start();
 
         // OBJECTS SETUP
         manager.setNPC(this);
         manager.setItem(this);
-
+        }
     }
     // public void drawPlayerLife() {
 
@@ -109,6 +113,7 @@ Thread gameThread = null;
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
+        if(gameStatus == 0){
         // MAP
         tileHandler.draw(graphics2D);
         // NPC
@@ -123,7 +128,10 @@ Thread gameThread = null;
         
         // PLAYER
         player.draw(graphics2D);
-        
+        }
+        else if(gameStatus ==1)
+            panel.draw();
+
         graphics2D.dispose();
     }
 }

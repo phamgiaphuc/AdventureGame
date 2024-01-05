@@ -277,6 +277,8 @@ public class CollisionChecker implements GameConstants {
 					entity.setSolidAreaY( entity.getSolidAreaY() - entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
+							gh.player.total_lives --;
+							gh.gameStatus = 1;
 							System.out.println("hitting");
 					break;
 					}
@@ -286,6 +288,8 @@ public class CollisionChecker implements GameConstants {
 					entity.setSolidAreaY( entity.getSolidAreaY() + entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
+							gh.player.total_lives --;
+							gh.gameStatus = 1;
 							System.out.println("hitting");
 					break;
 					}
@@ -295,6 +299,8 @@ public class CollisionChecker implements GameConstants {
 					entity.setSolidAreaX( entity.getSolidAreaX() - entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
+							gh.player.total_lives --;
+							gh.gameStatus = 1;
 							System.out.println("hitting");
 					break;
 					}
@@ -304,6 +310,8 @@ public class CollisionChecker implements GameConstants {
 					entity.setSolidAreaX( entity.getSolidAreaX() + entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
+							gh.player.total_lives --;
+							gh.gameStatus = 1;
 							System.out.println("hitting");
 					break;
 					}
