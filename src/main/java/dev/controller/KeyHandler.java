@@ -7,6 +7,7 @@ public class KeyHandler implements KeyListener {
 
     GameHandler gh;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public int spaceCount = 0;
     public boolean upDirection, downDirection, leftDirection, rightDirection;
     @Override
     public void keyTyped(KeyEvent e) {
@@ -38,6 +39,9 @@ public class KeyHandler implements KeyListener {
             //rightDirection = true;
             gh.gameStatus = 0;
         }
+        if (keyCode == KeyEvent.VK_SPACE && spaceCount == 0) {
+            spaceCount++;
+        }
     }
 
     @Override
@@ -58,6 +62,9 @@ public class KeyHandler implements KeyListener {
         if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
             rightPressed = false;
             rightDirection = false;
+        }
+        if (keyCode == KeyEvent.VK_SPACE) {
+            spaceCount = 0;
         }
     }
 }

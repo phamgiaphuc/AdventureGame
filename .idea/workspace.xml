@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2648e4a6-f1b9-4b38-86bf-90754cc1ba0f" name="Changes" comment="" />
+    <list default="true" id="2648e4a6-f1b9-4b38-86bf-90754cc1ba0f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/entities/Bullet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/resources/images/player/bullet/bullet-down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/resources/images/player/bullet/bullet-left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/resources/images/player/bullet/bullet-right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/resources/images/player/bullet/bullet-up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/controller/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/controller/GameHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/controller/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/controller/KeyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/entities/Player.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,11 +43,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "E:/AdventureGame-dev",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "/Users/macbook/Desktop/Code/mywork/AdventureGame/src/main/java/dev/resources/images/bullet",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -46,6 +57,31 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/dev/resources/images/bullet" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dev.Main" />
+      <module name="AdventureGame" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -63,5 +99,28 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

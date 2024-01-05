@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
+import dev.entities.Bullet;
 import dev.entities.Character;
 import dev.entities.Item;
 import dev.entities.Player;
@@ -16,6 +19,8 @@ public class GameHandler extends JPanel implements Runnable, GameConstants {
 Thread gameThread = null;
 
     public int gameStatus = 0;
+
+    public List<Bullet> bulletList = new ArrayList<>();
 
     public KeyHandler keyHandler = new KeyHandler(this);
 
@@ -108,6 +113,17 @@ Thread gameThread = null;
         for(int i = 0; i < bot.length; i++)
             if(bot[i] != null)
                 bot[i].update();
+
+        // Bullet
+        for (Bullet bullet : this.bulletList) {
+            for (Character bot: bot) {
+                if (bot == null) continue;
+                if(bullet.update(bot)) {
+                    System.out.println("Bullet remove: " + bullet);
+                    this.bulletList.remove(bullet);
+                }
+            }
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -122,8 +138,12 @@ Thread gameThread = null;
         for(int i = 0; i < bot.length; i++)
             if(bot[i] != null)
                 bot[i].draw(graphics2D);
-        // Item
 
+        // Bullet
+        for (Bullet bullet : this.bulletList) {
+            bullet.draw(graphics2D);
+        }
+        // Item
         for(int i = 0; i <item.length; i++)
             if(item[i] != null)
                 item[i].draw(this, graphics2D);

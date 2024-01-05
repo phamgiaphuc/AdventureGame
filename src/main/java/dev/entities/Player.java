@@ -1,4 +1,5 @@
 package dev.entities;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -26,19 +27,19 @@ public class Player extends Character {
     private boolean isBulletEffect = false;
     private boolean isSpeedUp = false;
     private boolean isShieldExisted = false;
-	
-	public final int screenX;
-	public final int screenY;
-    
 
-    public Player(GameHandler gh,KeyHandler keyH, String name) {
+    public final int screenX;
+    public final int screenY;
+
+
+    public Player(GameHandler gh, KeyHandler keyH, String name) {
 
         super(gh);
-        
+
         this.keyH = keyH;
 
-        this.screenX = GameConstants.screenHeight/2 - (GameConstants.tileSize/2);
-        this.screenY = GameConstants.screenWidth/2 - (GameConstants.tileSize/2);
+        this.screenX = GameConstants.screenHeight / 2 - (GameConstants.tileSize / 2);
+        this.screenY = GameConstants.screenWidth / 2 - (GameConstants.tileSize / 2);
 
         this.x_coordinate = 7 * GameConstants.tileSize;
         this.y_coordinate = 9 * GameConstants.tileSize;
@@ -55,7 +56,8 @@ public class Player extends Character {
 
 
     }
-        public void getPlayerImage() {
+
+    public void getPlayerImage() {
         try {
             up1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
             up2 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_2.png"));
@@ -73,118 +75,128 @@ public class Player extends Character {
             System.out.println(e.getMessage());
         }
     }
+
     public void update() {
-        if(keyH.upPressed == true || keyH.downPressed == true ||
-        keyH.leftPressed == true || keyH.rightPressed == true)
-            {
-            if(keyH.upPressed == true) {
+        if (keyH.upPressed == true || keyH.downPressed == true ||
+                keyH.leftPressed == true || keyH.rightPressed == true) {
+            if (keyH.upPressed == true) {
                 direction = "up";
-            }
-            else if(keyH.downPressed == true) {
+            } else if (keyH.downPressed == true) {
                 direction = "down";
-            }
-            else if(keyH.leftPressed == true) {
+            } else if (keyH.leftPressed == true) {
                 direction = "left";
-            }
-            else if(keyH.rightPressed == true) {
+            } else if (keyH.rightPressed == true) {
                 direction = "right";
             }
-    
+
             this.setCollide(false);
             gh.checker.checkTile(this);
 
             int indexItem = gh.checker.checkItem(this, true);
 
             int indexEntity = gh.checker.checkEntity(this, gh.bot);
-    
-            if(this.getCollide() == false){
+
+            if (this.getCollide() == false) {
                 switch (direction) {
                     case "up":
-                    this.setY( this.getY() - this.getSpeed()); break;
+                        this.setY(this.getY() - this.getSpeed());
+                        break;
                     case "down":
-                    this.setY( this.getY() + this.getSpeed()); break;
+                        this.setY(this.getY() + this.getSpeed());
+                        break;
                     case "left":
-                    this.setX( this.getX() - this.getSpeed()); break;
+                        this.setX(this.getX() - this.getSpeed());
+                        break;
                     case "right":
-                    this.setX( this.getX() + this.getSpeed()); break;
-                    
+                        this.setX(this.getX() + this.getSpeed());
+                        break;
+
                 }
             }
             spriteCounter++;
             //if (spriteCounter > 15) {
-                // spriteNum = (spriteNum == 1) ? 2 : 1;
-                // spriteCounter = 0;
-                if(spriteCounter >=0 && spriteCounter <=6)
-                    spriteNum = 1;
-                else if(spriteCounter > 6 && spriteCounter <= 10)
-                    spriteNum = 2;
-                else if(spriteCounter > 10 && spriteCounter <= 16)
-                    spriteNum = 3;
-                else
-                    spriteCounter = 0;
+            // spriteNum = (spriteNum == 1) ? 2 : 1;
+            // spriteCounter = 0;
+            if (spriteCounter >= 0 && spriteCounter <= 6) {
+                spriteNum = 1;
+            } else if (spriteCounter > 6 && spriteCounter <= 10) {
+                spriteNum = 2;
+            } else if (spriteCounter > 10 && spriteCounter <= 16) {
+                spriteNum = 3;
+            } else {
+                spriteCounter = 0;
+            }
             //}
         }
-        
+        if (keyH.spaceCount == 1) {
+            keyH.spaceCount = 0;
+            gh.bulletList.add(new Bullet(this.screenY, this.screenX, direction));
         }
-        public void draw(Graphics2D graphics2D) {
-		
-            BufferedImage image = null;
-                switch(direction) {
-                    case "up":
-                    if (spriteNum == 1) {
-                        image = up1;
-                    }
-                    if (spriteNum == 2) {
-                        image = up2;
-                    }
-                    if(spriteNum == 3)
-                        image = up3;
-                    break;
-                case "down":
-                    if (spriteNum == 1) {
-                        image = down1;
-                    }
-                    if (spriteNum == 2) {
-                        image = down2;
-                    }
-                    if(spriteNum == 3)
-                        image = down3;
-                    break;
-                case "left":
-                    if (spriteNum == 1) {
-                        image = left1;
-                    }
-                    if (spriteNum == 2) {
-                        image = left2;
-                    }
-                    if(spriteNum == 3)
-                        image = left3;
+    }
 
-                    break;
-                case "right":
-                    if (spriteNum == 1) {
-                        image = right1;
-                    }
-                    if (spriteNum == 2) {
-                        image = right2;
-                    }
-                    if(spriteNum == 3)
-                        image = right3;
-                    break;
-        
+    public void draw(Graphics2D graphics2D) {
+
+        BufferedImage image = null;
+        switch (direction) {
+            case "up":
+                if (spriteNum == 1) {
+                    image = up1;
                 }
-                //g2.drawImage(image, screenX, screenY, null);
-        graphics2D.drawImage(image, screenY, screenX, this.getWidth() , this.getHeight() , null);
+                if (spriteNum == 2) {
+                    image = up2;
+                }
+                if (spriteNum == 3) {
+                    image = up3;
+                }
+                break;
+            case "down":
+                if (spriteNum == 1) {
+                    image = down1;
+                }
+                if (spriteNum == 2) {
+                    image = down2;
+                }
+                if (spriteNum == 3) {
+                    image = down3;
+                }
+                break;
+            case "left":
+                if (spriteNum == 1) {
+                    image = left1;
+                }
+                if (spriteNum == 2) {
+                    image = left2;
+                }
+                if (spriteNum == 3) {
+                    image = left3;
+                }
+
+                break;
+            case "right":
+                if (spriteNum == 1) {
+                    image = right1;
+                }
+                if (spriteNum == 2) {
+                    image = right2;
+                }
+                if (spriteNum == 3) {
+                    image = right3;
+                }
+                break;
+
+        }
+        //g2.drawImage(image, screenX, screenY, null);
+        graphics2D.drawImage(image, screenY, screenX, this.getWidth(), this.getHeight(), null);
         graphics2D.setColor(Color.RED);
-        graphics2D.drawRect(screenY +8, screenX + 16, 32, 32);
+        graphics2D.drawRect(screenY + 8, screenX + 16, 32, 32);
 
         int labelWidth = graphics2D.getFontMetrics().stringWidth(this.getName());
         int labelX = screenY + (this.getWidth() / 2) - (labelWidth / 2);
         int labelY = screenX - 10;
         graphics2D.drawString(this.getName(), labelX, labelY);
 
-            
-            }
+
+    }
 
 
     public int getX() {
