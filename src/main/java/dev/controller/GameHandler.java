@@ -111,8 +111,10 @@ Thread gameThread = null;
     }
 
     public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
+
         if(gameStatus == 0){
         // MAP
         tileHandler.draw(graphics2D);
@@ -129,8 +131,8 @@ Thread gameThread = null;
         // PLAYER
         player.draw(graphics2D);
         }
-        else if(gameStatus ==1)
-            panel.draw();
+        else if(gameStatus == 1)
+            panel.draw(graphics2D);
 
         graphics2D.dispose();
     }

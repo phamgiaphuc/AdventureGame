@@ -46,6 +46,7 @@ public class Character {
 
     public Character(GameHandler gh) {
             this.gh = gh;
+            this.max_total_lives = 1;
     }
     public void setSolidAreaX(int x){
         this.solidArea.x = x;
