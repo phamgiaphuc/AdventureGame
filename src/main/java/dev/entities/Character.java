@@ -14,6 +14,10 @@ public class Character {
     public int index;
     public int hp = 100;
 
+        
+    public int total_lives;
+    public int max_total_lives;
+
     public int x_coordinate;
     public int y_coordinate;
 

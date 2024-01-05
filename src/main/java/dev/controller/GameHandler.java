@@ -54,6 +54,30 @@ Thread gameThread = null;
         manager.setItem(this);
 
     }
+    // public void drawPlayerLife() {
+
+    //     int x = gp.TileSize / 2;
+    //     int y = gp.TileSize / 2;
+    //     int i = 0;
+
+    //     // Draw Blank Heart
+    //     while (i < this.player.max_total_lives / 2) {
+    //         g2.drawImage("heart_blank", x, y, null);
+    //         i++;
+    //         x += gp.TileSize;
+    //     }
+
+    //     x = gp.TileSize / 2;
+    //     i = 0;
+    //     // Draw Full Heart
+    //     while (i < this.player.max_total_lives / 2) {
+    //         g2.drawImage(heart_full, x, y, null);
+    //         i++;
+    //         x += gp.TileSize;
+    //     }
+
+    //     if (gp.player.life % 2 == 1) g2.drawImage(heart_half, x, y, null);
+    // }
 
     @Override
     public void run() {

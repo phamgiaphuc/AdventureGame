@@ -23,7 +23,6 @@ public class Player extends Character {
     private int gold = 0;
     private int shield = 0;
     private int bullet = 50;
-    private int total_lives;
     private boolean isBulletEffect = false;
     private boolean isSpeedUp = false;
     private boolean isShieldExisted = false;
