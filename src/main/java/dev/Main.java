@@ -1,9 +1,10 @@
 package dev;
 
-import dev.controller.GameHandler;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+
+import dev.controller.GameHandler;
 
 public class Main {
     public static void main(String[] args) {
