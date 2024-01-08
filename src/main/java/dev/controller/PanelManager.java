@@ -11,6 +11,9 @@ public class PanelManager {
     GameHandler gh;
     Graphics2D g2;
 
+    // 1 GAME OVER
+    // 3 MENU
+    //5 WIN
     public BufferedImage heart_blank, heart_full, heart_half;
 
     public PanelManager(GameHandler gh){
@@ -77,7 +80,24 @@ public class PanelManager {
             g2.drawString("Press Play to start the game!", GameConstants.screenWidth / 2 - 216, 551);
             g2.setPaint(Color.white);
             g2.drawString("Press Play to start the game!", GameConstants.screenWidth / 2 - 215, 550);
+        } else if (gh.gameStatus == 5) {
+            // win
+            g2.setFont(new Font("Comic Sans MS", Font.PLAIN, 65));
+            g2.setPaint(new Color(102, 255, 102));
+            g2.fillRect(0, 0, GameConstants.screenWidth, GameConstants.screenHeight);
+
+            g2.setPaint(Color.black);
+            g2.drawString("You Win!", GameConstants.screenWidth / 2 - 129, 254);
+            g2.setPaint(Color.white);
+            g2.drawString("You Win!", GameConstants.screenWidth / 2 - 125, 250);
+
+            g2.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+            g2.setPaint(Color.black);
+            g2.drawString("Restart a new game?", GameConstants.screenWidth / 2 - 157, 452);
+            g2.setPaint(Color.white);
+            g2.drawString("Restart a new game?", GameConstants.screenWidth / 2 - 155, 450);
         }
+
     }
     public void drawPlayerLife(Graphics2D g2) {
 

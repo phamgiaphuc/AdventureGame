@@ -11,9 +11,12 @@ public class CollisionChecker implements GameConstants {
     public int top;
     public int bot;
 
+	private int count;
+
 	Bullet bullet;
     public CollisionChecker(GameHandler gh){
         this.gh = gh;
+		this.count = 0;
     }
 
     public void checkTile(Character character){
@@ -166,29 +169,21 @@ public class CollisionChecker implements GameConstants {
 		
 		int pillar = 1000;
 
-		// character.solidArea.x += character.getX();
-		// character.solidArea.y += character.getY();
-
-		// gh.player.solidArea.x += gh.player.getX();
-		// gh.player.solidArea.y += gh.player.getY();
 
 		for(int i = 0; i < gh.item.length; i++){
 
 			if(gh.item[i] != null){
 				character.solidArea.x += character.getX();
 				character.solidArea.y += character.getY();
-				//character.setSolidAreaX( character.getX() + character.getSolidAreaX() );
-				//character.setSolidAreaY( character.getY() + character.getSolidAreaY() );
+
 
 				gh.item[i].solidArea.x += gh.item[i].WorldX;
 				gh.item[i].solidArea.y += gh.item[i].WorldY;
-				//entity[i].setSolidAreaX( entity[i].getX() + entity[i].getSolidAreaX() );
-				//entity[i].setSolidAreaY( entity[i].getY() + entity[i].getSolidAreaY() );
+
 
 				switch (character.direction) {
 					case "up":
-					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					//character.solidArea.y -= character.getSpeed();
+
 					character.setSolidAreaY( character.getSolidAreaY() - character.getSpeed());
 					if(character.solidArea.intersects(gh.item[i].solidArea) == true){
 						if(gh.item[i].isCollide == true)
@@ -200,8 +195,7 @@ public class CollisionChecker implements GameConstants {
 					}
 					break;
 					case "down":
-					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					//character.solidArea.y += character.getSpeed();
+
 					character.setSolidAreaY( character.getSolidAreaY() + character.getSpeed());
 					if(character.solidArea.intersects(gh.item[i].solidArea) == true){
 						if(gh.item[i].isCollide == true)
@@ -213,8 +207,7 @@ public class CollisionChecker implements GameConstants {
 					}
 					break;
 					case "left":
-					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					//character.solidArea.x -= character.getSpeed();
+
 					character.setSolidAreaX( character.getSolidAreaX() - character.getSpeed());
 					if(character.solidArea.intersects(gh.item[i].solidArea) == true){
 						if(gh.item[i].isCollide == true)
@@ -226,8 +219,7 @@ public class CollisionChecker implements GameConstants {
 					}
 					break;
 					case "right":
-					//character.setSolidAreaY( character.getSolidAreaX() - character.getSpeed());
-					//character.solidArea.x += character.getSpeed();
+
 					character.setSolidAreaX( character.getSolidAreaX() + character.getSpeed());
 					if(character.solidArea.intersects(gh.item[i].solidArea) == true){
 						if(gh.item[i].isCollide == true)
@@ -256,7 +248,7 @@ public class CollisionChecker implements GameConstants {
 
 	public void checkPlayer(Character entity){
 
-
+		count ++;
 		entity.setSolidAreaX( entity.getSolidAreaX() + entity.getX());
 
 		entity.setSolidAreaY( entity.getSolidAreaY() + entity.getY());
@@ -272,7 +264,10 @@ public class CollisionChecker implements GameConstants {
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
 							gh.player.total_lives --;
-							if(gh.player.total_lives == 0)gh.gameStatus = 1;
+							if(gh.player.total_lives <= 0){
+								gh.gameThread = null;
+								gh.gameStatus = 1;
+								}
 					break;
 					}
 					case "down":
@@ -281,7 +276,10 @@ public class CollisionChecker implements GameConstants {
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
 							gh.player.total_lives --;
-							if(gh.player.total_lives == 0)gh.gameStatus = 1;
+							if(gh.player.total_lives <= 0){
+								gh.gameStatus = 1;
+								gh.gameThread = null;
+								}
 							
 					break;
 					}
@@ -291,7 +289,10 @@ public class CollisionChecker implements GameConstants {
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
 							gh.player.total_lives --;
-							if(gh.player.total_lives == 0)gh.gameStatus = 1;
+							if(gh.player.total_lives <= 0){
+								gh.gameStatus = 1;
+								gh.gameThread = null;
+								}
 							
 					break;
 					}
@@ -301,7 +302,11 @@ public class CollisionChecker implements GameConstants {
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
 							gh.player.total_lives --;
-							if(gh.player.total_lives == 0)gh.gameStatus = 1;
+							if(gh.player.total_lives <= 0){
+								gh.gameStatus = 1;
+								gh.gameThread = null;
+								
+							}
 
 					break;
 					}
@@ -337,13 +342,13 @@ public class CollisionChecker implements GameConstants {
 			TopRow = (TopY - bullet.speed)/tileSize;
 			tileNum1 = gh.tileHandler.map[TopRow][LeftCol];
 			tileNum2 = gh.tileHandler.map[TopRow][RightCol];
-			//System.out.println(TopRow + " " + LeftCol + " " + TopRow + " " + RightCol);
+
 				if(gh.tileHandler.tile[tileNum1].collision == true || gh.tileHandler.tile[tileNum2].collision == true ){
 					bullet.power = 0;
-					//System.out.println("hitting solid");
+
 					return true;
 				}
-					//bullet.setCollide(true);
+
 			break;
 			case "down":
 			BottomRow = (BottomY + bullet.speed)/tileSize;
@@ -352,9 +357,9 @@ public class CollisionChecker implements GameConstants {
 
 				if(gh.tileHandler.tile[tileNum1].collision == true || gh.tileHandler.tile[tileNum2].collision == true ){
 					bullet.power = 0;
-					//System.out.println("hitting solid");
+
 					return true;
-				    //bullet.setCollide(true);
+
 				}
 			break;
 			case "left":
@@ -363,10 +368,8 @@ public class CollisionChecker implements GameConstants {
 			tileNum2 = gh.tileHandler.map[BottomRow][LeftCol];
 
 				if(gh.tileHandler.tile[tileNum1].collision == true || gh.tileHandler.tile[tileNum2].collision == true ){
-					bullet.power = 0;
-					//System.out.println("hitting solid");
 					return true;
-					//bullet.setCollide(true);
+
 				}
 			break;
 			case "right":
@@ -375,10 +378,7 @@ public class CollisionChecker implements GameConstants {
 			tileNum2 = gh.tileHandler.map[BottomRow][RightCol];
 
 				if(gh.tileHandler.tile[tileNum1].collision == true || gh.tileHandler.tile[tileNum2].collision == true ){
-					bullet.power = 0;
-					//System.out.println("hitting solid");
 					return true;
-					//bullet.setCollide(true);
 				}
 			break;
 			

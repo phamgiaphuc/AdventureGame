@@ -38,6 +38,8 @@ Thread gameThread = null;
     
     // Item
     public Item item[] = new Item[10];
+
+    public int quantity;
     
 
     //public PlayerHandler playerHandler = new PlayerHandler(this, keyHandler, player);
@@ -53,18 +55,20 @@ Thread gameThread = null;
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
         gameStatus = 3;
+        quantity = 0;
     }
 
     public void startGameThread() {
         
+        
+
         gameThread = new Thread(this);
-        {
         gameThread.start();
 
         // OBJECTS SETUP
         manager.setNPC(this);
         manager.setItem(this);
-        }
+
     }
 
     @Override
@@ -84,19 +88,19 @@ Thread gameThread = null;
     }
 
     public void update() {
-        if(gameStatus == 2){
+        if(gameStatus != 3 || gameStatus != 5){
         //PLAYER
         player.update();
 
         //NPC
         
-        //int res = 0;
+        int res = 0;
         for(int i = 0; i < bot.length; i++){
             
             if(bot[i] != null)
                 if(bot[i].checkDead() != true){
                     bot[i].update();
-                    //res ++;
+                    res ++;
                 }
                 else{
                     bot[i] = null;
@@ -120,6 +124,7 @@ Thread gameThread = null;
         
 
     //System.out.println(res);
+    quantity = res;
     }
     }
 

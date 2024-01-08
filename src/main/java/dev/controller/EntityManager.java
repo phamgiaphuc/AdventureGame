@@ -42,8 +42,8 @@ public class EntityManager {
 
     public void setItem(GameHandler gh){
         gh.item[0] = new Door(gh);
-        gh.item[0].WorldX = 12 * GameConstants.tileSize;
-        gh.item[0].WorldY = 11 * GameConstants.tileSize;
+        gh.item[0].WorldX = 2 * GameConstants.tileSize;
+        gh.item[0].WorldY = 16 * GameConstants.tileSize;
 
     }
     

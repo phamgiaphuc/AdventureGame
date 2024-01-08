@@ -94,10 +94,10 @@ public class Player extends Character {
             gh.checker.checkTile(this);
 
             int indexItem = gh.checker.checkItem(this, true);
-
+            open(indexItem);
             int indexEntity = gh.checker.checkEntity(this, gh.bot);
             //System.out.println(indexEntity + indexItem + "example");
-
+            
             if (this.getCollide() == false) {
                 switch (direction) {
                     case "up":
@@ -135,6 +135,11 @@ public class Player extends Character {
             gh.bulletList.add(new Bullet((this.getX()) , (this.getY()), direction,gh));
         }
     }
+    public void open(int i){
+        if(i!= 1000 && gh.quantity == 0){
+            gh.gameStatus = 5;
+    }
+}
 
     public void draw(Graphics2D graphics2D) {
 
