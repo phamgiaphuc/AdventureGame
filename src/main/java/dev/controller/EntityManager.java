@@ -14,26 +14,29 @@ public class EntityManager {
     public void setNPC(GameHandler gh){
         gh.bot[0] = new Bot(gh);
         gh.bot[0].setX(1 * GameConstants.tileSize);
-        gh.bot[0].setY(1 * GameConstants.tileSize);
+        gh.bot[0].setY(8 * GameConstants.tileSize);
         gh.bot[0].direction = "right";
         // indidual index
         gh.bot[0].index = 0;
         // BOT REGION
         gh.bot[0].Regionx = 1;
-        gh.bot[0].Regiony = 1;
-        gh.bot[0].wid = 4;
-        gh.bot[0].heig = 4;
+        gh.bot[0].Regiony = 8;
+        gh.bot[0].wid = 3;
+        gh.bot[0].heig = 5;
+        
 
 
-        // gh.bot[1] = new Bot(gh);
-        // gh.bot[1].setX(10 * GameConstants.tileSize);
-        // gh.bot[1].setY(9 * GameConstants.tileSize);
-        // gh.bot[1].direction = "left";
-        // gh.bot[1].index = 1;
-        // gh.bot[1].Regionx = 6;
-        // gh.bot[1].Regiony = 8;
-        // gh.bot[1].wid = 3;
-        // gh.bot[1].heig = 4;
+        gh.bot[1] = new Bot(gh);
+        gh.bot[1].setX(12 * GameConstants.tileSize);
+        gh.bot[1].setY(1 * GameConstants.tileSize);
+        gh.bot[1].direction = "left";
+
+        gh.bot[1].index = 1;
+
+        gh.bot[1].Regionx = 12;
+        gh.bot[1].Regiony = 1;
+        gh.bot[1].wid = 3;
+        gh.bot[1].heig = 5;
 
     }
 

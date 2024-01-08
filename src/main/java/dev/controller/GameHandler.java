@@ -20,7 +20,8 @@ Thread gameThread = null;
 
     public int gameStatus = 0;
 
-    public List<Bullet> bulletList = new ArrayList<>();
+    //public Bullet bulletList[] = new Bullet[20];
+    public List<Bullet> bulletList = new ArrayList<Bullet>();
 
     public KeyHandler keyHandler = new KeyHandler(this);
 
@@ -51,11 +52,13 @@ Thread gameThread = null;
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+        gameStatus = 3;
     }
 
     public void startGameThread() {
-        if(this.gameStatus == 0){
+        
         gameThread = new Thread(this);
+        {
         gameThread.start();
 
         // OBJECTS SETUP
@@ -63,30 +66,6 @@ Thread gameThread = null;
         manager.setItem(this);
         }
     }
-    // public void drawPlayerLife() {
-
-    //     int x = gp.TileSize / 2;
-    //     int y = gp.TileSize / 2;
-    //     int i = 0;
-
-    //     // Draw Blank Heart
-    //     while (i < this.player.max_total_lives / 2) {
-    //         g2.drawImage("heart_blank", x, y, null);
-    //         i++;
-    //         x += gp.TileSize;
-    //     }
-
-    //     x = gp.TileSize / 2;
-    //     i = 0;
-    //     // Draw Full Heart
-    //     while (i < this.player.max_total_lives / 2) {
-    //         g2.drawImage(heart_full, x, y, null);
-    //         i++;
-    //         x += gp.TileSize;
-    //     }
-
-    //     if (gp.player.life % 2 == 1) g2.drawImage(heart_half, x, y, null);
-    // }
 
     @Override
     public void run() {
@@ -105,25 +84,43 @@ Thread gameThread = null;
     }
 
     public void update() {
+        if(gameStatus == 2){
         //PLAYER
-
         player.update();
 
         //NPC
-        for(int i = 0; i < bot.length; i++)
+        
+        //int res = 0;
+        for(int i = 0; i < bot.length; i++){
+            
             if(bot[i] != null)
-                bot[i].update();
-
-        // Bullet
-        for (Bullet bullet : this.bulletList) {
-            for (Character bot: bot) {
-                if (bot == null) continue;
-                if(bullet.update(bot)) {
-                    System.out.println("Bullet remove: " + bullet);
-                    this.bulletList.remove(bullet);
+                if(bot[i].checkDead() != true){
+                    bot[i].update();
+                    //res ++;
                 }
+                else{
+                    bot[i] = null;
+                    System.out.println("hello");
+                }
+
             }
-        }
+        
+        // Bullet
+        List<Bullet> tmp = new ArrayList<Bullet>();
+        for (Bullet bullet : this.bulletList){
+            //res ++;
+            if(bullet.status != true && bullet.shot != true){
+                bullet.update();
+                bullet.damage(bot);
+            }else
+                tmp.add(bullet);
+            }
+            this.bulletList.removeAll(tmp);
+            tmp.removeAll(tmp);
+        
+
+    //System.out.println(res);
+    }
     }
 
     public void paintComponent(Graphics g) {
@@ -131,18 +128,23 @@ Thread gameThread = null;
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
 
-        if(gameStatus == 0){
+        if(gameStatus == 2){
         // MAP
         tileHandler.draw(graphics2D);
+        // LIFE
+        panel.drawPlayerLife(graphics2D);
         // NPC
-        for(int i = 0; i < bot.length; i++)
+        for(int i = 0; i < bot.length; i++){
+            //if(bot[i].isDead == true) bot[i] = null;
             if(bot[i] != null)
                 bot[i].draw(graphics2D);
-
-        // Bullet
-        for (Bullet bullet : this.bulletList) {
-            bullet.draw(graphics2D);
         }
+        // Bullet
+        for (Bullet bullet : this.bulletList)
+            if(bullet.status != true || bullet.shot != true)
+                bullet.draw(graphics2D);
+            
+        
         // Item
         for(int i = 0; i <item.length; i++)
             if(item[i] != null)
@@ -151,7 +153,7 @@ Thread gameThread = null;
         // PLAYER
         player.draw(graphics2D);
         }
-        else if(gameStatus == 1)
+        else
             panel.draw(graphics2D);
 
         graphics2D.dispose();

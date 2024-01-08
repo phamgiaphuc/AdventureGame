@@ -63,6 +63,7 @@ public class Bot extends Character {
         map =  Map.map_1;
         direction = "down";
         speed = 1;
+        //isDead = false;
         // SIZE
         // solidArea.x = 0;
         // solidArea.y = 0;
@@ -73,7 +74,10 @@ public class Bot extends Character {
         solidArea.width = 32;
         solidArea.height = 32;
         setImage();
-
+        
+        //HEALTHY
+        this.max_total_lives = 4;
+        this.total_lives = this.max_total_lives;
         // ACTIVE ZONE
         check = new int[100][100];
 
@@ -83,20 +87,22 @@ public class Bot extends Character {
         territory = new int[80][80];
         SolidX = 16;
         SolidY = 8;
-        //this.x_coordinate = x_coordinate;
-        //this.y_coordinate = y_coordinate;
     }
 
     public void setImage(){
                 try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
-            //up2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
-            //down2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
-            //left2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
-            //right2 = ImageIO.read(getClass().getResourceAsStream("/images/player/boy_up_1.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_up_1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_up_2.png"));
+            up3 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_up_2.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_down_1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_down_2.png"));
+            down3 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_down_2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_left_1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_left_2.png"));
+            left3 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_left_3.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_right_1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_right_2.png"));
+            right3 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_right_3.png"));
         }catch(IOException e){
             
         }
@@ -116,102 +122,44 @@ public class Bot extends Character {
 
 
         // PLAYER COORDINATE
-         X = (gh.player.getY() );
-         Y = (gh.player.getX());
+         X = (gh.player.getX() + gh.player.solidArea.x);
+         Y = (gh.player.getY() + gh.player.solidArea.y);
          //X = (gh.player.getY() + gh.player.solidArea.x) / GameConstants.tileSize;
          //Y = (gh.player.getX()+ gh.player.solidArea.y) / GameConstants.tileSize;
 
         if( y1 <= Y && Y <= y2 && x1 <= X && X <= x3 ){
             this.zone = true;
-            System.out.println("zone");
+            //System.out.println("zone");
         }
         else{
             this.zone = false;
             // fix = 0;
             // ok = false;
-            System.out.println("out zone");
+            //System.out.println("out zone");
         }
-        x1 = this.Regionx;
-         y1 = this.Regiony;
+        // x1 = this.Regionx;
+        //  y1 = this.Regiony;
 
-         x2 = this.Regionx;
-         y2 = (this.Regiony + this.heig);
+        //  x2 = this.Regionx;
+        //  y2 = (this.Regiony + this.heig);
 
-         x3 = (this.Regionx +this.wid);
-         y3 = this.Regiony;
+        //  x3 = (this.Regionx +this.wid);
+        //  y3 = this.Regiony;
 
-         x4 = (this.Regionx +this.wid);
-         y4 = (this.Regiony + this.heig);
+        //  x4 = (this.Regionx +this.wid);
+        //  y4 = (this.Regiony + this.heig);
 
     }
-// public void dfs(int x, int y,int playerX, int playerY, int res){
-
-//         if(x == playerX && y == playerY){
-//             if(fix >= res  || ok == false){
-//                 ok = true;
-//                 fix = res;
-//                 for(int k = 0; k < fix; k ++)
-//                     f_path[k] = path[k];
-//             }
-//             return;
-//         }
-
-//         //move();
-
-//         System.out.println(x + "  " + y);
-//         if( x < 0 || x >= this.wid  || y < 0 || y >= this.heig )
-//             return;
-//         if(check[x][y] == 1)
-//             return;
-
-//         for(int i = 0; i < 4; i++){
-//             if(x + r[i] >= 0 && x + r[i] < this.wid && y + l[i] >= 0 && y + l[i] < this.heig)
-//                 if(territory[x + r[i]][y + l[i]] != 1){
-//                     path[res] = i;
-//                     check[x][y] = 1;
-//                     // if(i == 0) this.direction = "left";
-//                     // if(i == 1) this.direction = "right";
-//                     // if(i == 2) this.direction = "up";
-//                     // if(i == 3) this.direction = "down";
-//                     playerX = gh.player.getY() / GameConstants.tileSize;
-//                     playerY = gh.player.getX() / GameConstants.tileSize;
-//                     //move();
-//                     dfs(x + r[i], y + l[i], playerX, playerY, res +1);
-//                     check[x][y] = 0;
-
-//                 }
-//         }
-//     }
 
 public void attack(){
      botX = (this.getY() + this.solidArea.x);
      botY = (this.getX() + this.solidArea.y);
      playerX = gh.player.getY() + gh.player.solidArea.x;
      playerY = gh.player.getX() + gh.player.solidArea.y;
-    //int botX = this.getX() / GameConstants.tileSize;
-    //int botY = this.getY() / GameConstants.tileSize;
-    // System.out.println("start:" + botX + "  " + botY);
-    //dfs(botX, botY, playerX, playerY, 0);
 
-    // for(int i = 0; i < fix; i++)
-    //     System.out.printf("%d ", f_path[i]);
-        //System.out.println(" hello");
 
 }
 
-// public void zone(){
-//         //ACTIVE ZONE
-//         int x = this.Regionx;
-//         int y = this.Regiony;
-
-//     // for(int i = 0;i < wid; i++)
-//     //     for(int j = 0; j < heig; j++){
-//     //         territory[x + i][y +j] = (gh.tileHandler.tile[gh.tileHandler.map[x + i][y + j]].collision) ? 1 : 0;
-//     //         check[x + i][y +j] = 0;
-//     //     }
-
-
-// }
 public void tracking(){
         //Random number = new Random();
         //int t = number.nextInt(2);
@@ -246,7 +194,7 @@ public void setAction(){
     if(this.zone == true){
         attack();
         tracking();
-        System.out.println(direction);
+        //System.out.println(direction);
         move();
     }
     else{
@@ -269,16 +217,10 @@ public void setAction(){
     }
     }
     public void update(){
-        //System.out.println("begin");
         setAction();
+        //System.out.println(this.index +" " +total_lives);
     }
 
-    // public void checkDirection(int i){
-    //     if(i == 0)direction = "left";
-    //     if(i == 1)direction = "right";
-    //     if(i == 2)direction = "up";
-    //     if(i == 3)direction = "down";
-    // }
 
     public void move(){
         //if(ok == true){

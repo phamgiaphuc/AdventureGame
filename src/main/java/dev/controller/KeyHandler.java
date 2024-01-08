@@ -34,10 +34,14 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
             rightDirection = true;
         }
-        if (keyCode == KeyEvent.VK_ENTER && gh.gameStatus == 1) {
+        if (keyCode == KeyEvent.VK_ENTER) {
             //rightPressed = true;
             //rightDirection = true;
-            gh.gameStatus = 0;
+            if(gh.gameStatus == 1)
+                gh.gameStatus = 3 ;
+            if(gh.gameStatus == 3)
+                gh.gameStatus = 2;
+
         }
         if (keyCode == KeyEvent.VK_SPACE && spaceCount == 0) {
             spaceCount++;

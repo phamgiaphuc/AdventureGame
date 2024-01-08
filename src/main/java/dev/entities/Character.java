@@ -28,7 +28,7 @@ public class Character {
     public int heig;
     
 
-    public boolean isDead = true;
+    private boolean isDead;
     public boolean isCollide = false;
 
     public int speed = 5;
@@ -42,11 +42,17 @@ public class Character {
     public Rectangle solidArea = new Rectangle(8, 16, 32, 32);
 
     public int SolidX, SolidY;
-    //public Rectangle solidArea;
 
     public Character(GameHandler gh) {
             this.gh = gh;
-            this.max_total_lives = 1;
+            //this.max_total_lives = 1;
+            //this.isDead = false;
+    }
+    public boolean checkDead(){
+        return isDead;
+    }
+    public void getDead(boolean t){
+        this.isDead = t;
     }
     public void setSolidAreaX(int x){
         this.solidArea.x = x;
@@ -74,14 +80,6 @@ public class Character {
 
     public void setHp(int hp) {
         this.hp = hp;
-    }
-
-    public boolean isDead() {
-        return isDead;
-    }
-
-    public void setDead(boolean dead) {
-        this.isDead = dead;
     }
 
     public void setCollide(boolean isCollide) {
@@ -116,8 +114,6 @@ public class Character {
     }
 
     public void update(){
-        
-        
         setAction();
 
         isCollide = false;
@@ -162,7 +158,6 @@ public class Character {
 								image = right1;
 								break;
 							}
-            //if(this.index == -1)System.out.println("tien");
 			g2.drawImage(image, screenX, screenY, GameConstants.tileSize, GameConstants.tileSize, null);
             g2.setColor(Color.RED);
             g2.drawRect(screenX + getSolidAreaY(),screenY  + getSolidAreaX(), 32, 32);

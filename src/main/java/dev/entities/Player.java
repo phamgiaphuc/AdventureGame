@@ -41,8 +41,9 @@ public class Player extends Character {
         this.screenX = GameConstants.screenHeight / 2 - (GameConstants.tileSize / 2);
         this.screenY = GameConstants.screenWidth / 2 - (GameConstants.tileSize / 2);
 
-        this.x_coordinate = 7 * GameConstants.tileSize;
-        this.y_coordinate = 9 * GameConstants.tileSize;
+        this.max_total_lives = 6;
+        this.x_coordinate = 2 * GameConstants.tileSize;
+        this.y_coordinate = 4 * GameConstants.tileSize;
         this.total_lives = this.max_total_lives;
 
         this.name = name;
@@ -95,6 +96,7 @@ public class Player extends Character {
             int indexItem = gh.checker.checkItem(this, true);
 
             int indexEntity = gh.checker.checkEntity(this, gh.bot);
+            //System.out.println(indexEntity + indexItem + "example");
 
             if (this.getCollide() == false) {
                 switch (direction) {
@@ -130,7 +132,7 @@ public class Player extends Character {
         }
         if (keyH.spaceCount == 1) {
             keyH.spaceCount = 0;
-            gh.bulletList.add(new Bullet(this.screenY, this.screenX, direction));
+            gh.bulletList.add(new Bullet((this.getX()) , (this.getY()), direction,gh));
         }
     }
 
@@ -189,6 +191,7 @@ public class Player extends Character {
         graphics2D.drawImage(image, screenY, screenX, this.getWidth(), this.getHeight(), null);
         graphics2D.setColor(Color.RED);
         graphics2D.drawRect(screenY + 8, screenX + 16, 32, 32);
+        //graphics2D.drawRect(screenY, screenX, 48, 48);
 
         int labelWidth = graphics2D.getFontMetrics().stringWidth(this.getName());
         int labelX = screenY + (this.getWidth() / 2) - (labelWidth / 2);
