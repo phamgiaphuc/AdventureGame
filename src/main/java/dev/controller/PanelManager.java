@@ -12,9 +12,11 @@ public class PanelManager {
     Graphics2D g2;
 
     // 1 GAME OVER
-    // 3 MENU
-    //5 WIN
+    // 3 WIN
+    //5 MENU
+    private int count =0;
     public BufferedImage heart_blank, heart_full, heart_half;
+    public BufferedImage player_image;
 
     public PanelManager(GameHandler gh){
         this.gh = gh;
@@ -22,6 +24,7 @@ public class PanelManager {
             heart_blank = ImageIO.read(getClass().getResourceAsStream("../resources/images/heart/heart_blank.png"));
             heart_full = ImageIO.read(getClass().getResourceAsStream("../resources/images/heart/heart_full.png"));
             heart_half = ImageIO.read(getClass().getResourceAsStream("../resources/images/heart/heart_half.png"));
+
 
         }catch(IOException e){
             System.out.println(e.getMessage());
@@ -58,6 +61,22 @@ public class PanelManager {
             g2.setPaint(Color.white);
             g2.drawString("try to keep an eye out on those bots!", GameConstants.screenWidth / 2 - 275, 600);
         } else if (gh.gameStatus == 3) {
+            //PLAYER IMAGE
+            count ++;
+            try {
+                if(count >= 0 && count <= 15)
+                    player_image = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_left_1.png"));
+                if(count > 15 && count <= 30)
+                    player_image = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_down_1.png"));
+                if(count > 30 && count <= 45)
+                    player_image = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_right_1.png"));
+                if(count > 45 && count <= 60)
+                    player_image = ImageIO.read(getClass().getResourceAsStream("../resources/images/player/boy_up_1.png"));
+                
+            } catch (IOException e) {
+            }
+            count = (count == 60) ? 0 : count;
+            //g2.drawImage(player_image, 4* GameConstants.tileSize, 3 * GameConstants.tileSize, (9 * GameConstants.tileSize), 7 *GameConstants.tileSize, null);
             // menu
             g2.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
             g2.setPaint(new Color(102, 178, 255));
@@ -96,6 +115,8 @@ public class PanelManager {
             g2.drawString("Restart a new game?", GameConstants.screenWidth / 2 - 157, 452);
             g2.setPaint(Color.white);
             g2.drawString("Restart a new game?", GameConstants.screenWidth / 2 - 155, 450);
+            g2.drawImage(player_image, 4* GameConstants.tileSize, 3 * GameConstants.tileSize, (9 * GameConstants.tileSize), 7 *GameConstants.tileSize, null);
+            
         }
 
     }
@@ -108,7 +129,8 @@ public class PanelManager {
 
         // Draw Blank Heart
         while (i < gh.player.max_total_lives / 2) {
-            g2.drawImage(heart_blank, x, y, null);
+            
+            g2.drawImage(heart_blank, x, y, GameConstants.tileSize, GameConstants.tileSize, null);
             i++;
             x += GameConstants.tileSize;
         }
@@ -116,14 +138,16 @@ public class PanelManager {
         x = GameConstants.tileSize / 2;
         i = 0;
         // Draw Full Heart
-        while (i < gh.player.max_total_lives / 2) {
-            g2.drawImage(this.heart_full, x, y, null);
+        while (i < gh.player.total_lives / 2) {
+            
+            g2.drawImage(this.heart_full, x, y, GameConstants.tileSize, GameConstants.tileSize, null);
             i++;
             x += GameConstants.tileSize;
         }
 
         if (gh.player.total_lives % 2 == 1)
-            g2.drawImage(this.heart_half, x, y, null);
+            
+            g2.drawImage(this.heart_half, x, y, GameConstants.tileSize, GameConstants.tileSize, null);
     }
     
 }

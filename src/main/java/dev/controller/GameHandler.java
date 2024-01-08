@@ -91,6 +91,7 @@ Thread gameThread = null;
         if(gameStatus != 3 || gameStatus != 5){
         //PLAYER
         player.update();
+        //System.out.println(player.total_lives);
 
         //NPC
         
@@ -104,7 +105,7 @@ Thread gameThread = null;
                 }
                 else{
                     bot[i] = null;
-                    System.out.println("hello");
+                    //System.out.println("hello");
                 }
 
             }

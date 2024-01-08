@@ -26,12 +26,16 @@ public class Character {
     public int Regiony;
     public int wid;
     public int heig;
-    
+    // NPC TIME
+    public boolean available;
+    public int duration;
 
     private boolean isDead;
     public boolean isCollide = false;
 
     public int speed = 5;
+
+    public int level;
 
 
     public BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;

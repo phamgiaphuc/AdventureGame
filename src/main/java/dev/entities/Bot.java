@@ -16,6 +16,7 @@ public class Bot extends Character {
     //int dem = -1;
 
     //GameHandler gh;
+
     public boolean hitPlayer;
     private int directionX, directionY;
     public boolean ok = false;
@@ -27,6 +28,7 @@ public class Bot extends Character {
     public int[] f_path;
 
     public int[][] check;
+
     
     //player
     public int playerX, playerY;
@@ -34,7 +36,7 @@ public class Bot extends Character {
 
     public int num = -1;
 
-    int time =0;
+    int time = 0;
     int r[] = {-1, 1, 0, 0};
     int l[] = {0, 0, -1, 1};
 
@@ -63,12 +65,7 @@ public class Bot extends Character {
         map =  Map.map_1;
         direction = "down";
         speed = 1;
-        //isDead = false;
-        // SIZE
-        // solidArea.x = 0;
-        // solidArea.y = 0;
-        // solidArea.width = 48;
-        // solidArea.height = 48;
+        available = true;
         solidArea.x = 16;
         solidArea.y = 8;
         solidArea.width = 32;
@@ -90,7 +87,7 @@ public class Bot extends Character {
     }
 
     public void setImage(){
-                try{
+        try{
             up1 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_up_1.png"));
             up2 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_up_2.png"));
             up3 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_up_2.png"));
@@ -104,7 +101,6 @@ public class Bot extends Character {
             right2 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_right_2.png"));
             right3 = ImageIO.read(getClass().getResourceAsStream("../resources/images/spider/spider_right_3.png"));
         }catch(IOException e){
-            
         }
     }
     public void trespassing(){
@@ -122,32 +118,19 @@ public class Bot extends Character {
 
 
         // PLAYER COORDINATE
-         X = (gh.player.getX() + gh.player.solidArea.x);
-         Y = (gh.player.getY() + gh.player.solidArea.y);
-         //X = (gh.player.getY() + gh.player.solidArea.x) / GameConstants.tileSize;
-         //Y = (gh.player.getX()+ gh.player.solidArea.y) / GameConstants.tileSize;
+         X = (gh.player.getX() + gh.player.solidArea.x +10);
+         Y = (gh.player.getY() + gh.player.solidArea.y +10);
+
 
         if( y1 <= Y && Y <= y2 && x1 <= X && X <= x3 ){
             this.zone = true;
-            //System.out.println("zone");
+
         }
         else{
             this.zone = false;
-            // fix = 0;
-            // ok = false;
-            //System.out.println("out zone");
+
         }
-        // x1 = this.Regionx;
-        //  y1 = this.Regiony;
 
-        //  x2 = this.Regionx;
-        //  y2 = (this.Regiony + this.heig);
-
-        //  x3 = (this.Regionx +this.wid);
-        //  y3 = this.Regiony;
-
-        //  x4 = (this.Regionx +this.wid);
-        //  y4 = (this.Regiony + this.heig);
 
     }
 
@@ -161,16 +144,14 @@ public void attack(){
 }
 
 public void tracking(){
-        //Random number = new Random();
-        //int t = number.nextInt(2);
-        directionX = playerX - botX;
-        directionY = playerY - botY;
 
-    //if(!directionX){
-        {
+    directionX = playerX - botX;
+    directionY = playerY - botY;
+
     if( directionX > 8)
         this.direction = "down";
-        else    if(directionY < 0)
+        else
+        if(directionY < 0)
         this.direction = "left";
     else if(directionX < 0)
         this.direction = "up";
@@ -181,53 +162,73 @@ public void tracking(){
         this.direction = "right";
 
     }
-    }
 
-//}
 }
 
 public void setAction(){
-
-    //direction = "down";
-    //zone();
+    time ++;
+    if(this.level == 3){
     trespassing();
     if(this.zone == true){
         attack();
         tracking();
-        //System.out.println(direction);
         move();
-    }
-    else{
-        time ++;
+    }else{
         if(time == 25){
         Random rand = new Random();
         count = rand.nextInt(40);
         if(count <= 10)
             direction = "left";
-        else if(count > 10 && count <= 20){
+        else if(count > 10 && count <= 20)
             direction = "right";
-        }else if(count > 20 && count <= 30){
+        else if(count > 20 && count <= 30)
             direction = "up";
-        }else if(count >= 30){
+        else if(count >= 30)
            direction = "down";
-        }
+        
         time = 0;
         }
-        //move();
     }
-    }
-    public void update(){
+}
+else if(this.level == 1){
+
+        
+        if(time >= 45){
+            if(this.direction == "left")
+                this.direction = "right";
+            else
+                this.direction = "left";
+            time = 0;
+        }
+        move();
+}else if(this.level == 2){
+        if(time >= 45){
+            if(this.direction == "up")
+                this.direction = "down";
+            else
+                this.direction = "up";
+            time = 0;
+        }
+        move();
+}
+}
+    
+public void update(){
+        if(this.available == false){
+            duration ++;
+            if(duration == 25){
+                this.available = true;
+                duration = 0;
+            }
+        
+        }
         setAction();
-        //System.out.println(this.index +" " +total_lives);
+
     }
 
 
     public void move(){
-        //if(ok == true){
 
-        //num ++;
-        //checkDirection(f_path[num]);
-        //for(int i = 0 ; i <= 1; i++){
         isCollide = false;
         gh.checker.checkTile(this);
 
@@ -244,9 +245,6 @@ public void setAction(){
                 case "right": this.setX(x_coordinate + speed); break;
             }
         }
-        //this.draw(graphics2D);
-    //}
-    //}
     }
 
     

@@ -11,12 +11,11 @@ public class CollisionChecker implements GameConstants {
     public int top;
     public int bot;
 
-	private int count;
+
 
 	Bullet bullet;
     public CollisionChecker(GameHandler gh){
         this.gh = gh;
-		this.count = 0;
     }
 
     public void checkTile(Character character){
@@ -248,7 +247,6 @@ public class CollisionChecker implements GameConstants {
 
 	public void checkPlayer(Character entity){
 
-		count ++;
 		entity.setSolidAreaX( entity.getSolidAreaX() + entity.getX());
 
 		entity.setSolidAreaY( entity.getSolidAreaY() + entity.getY());
@@ -263,11 +261,14 @@ public class CollisionChecker implements GameConstants {
 					entity.setSolidAreaY( entity.getSolidAreaY() - entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
+							if(entity.available == true){
 							gh.player.total_lives --;
 							if(gh.player.total_lives <= 0){
 								gh.gameThread = null;
 								gh.gameStatus = 1;
 								}
+								entity.available = false;
+							}
 					break;
 					}
 					case "down":
@@ -275,12 +276,14 @@ public class CollisionChecker implements GameConstants {
 					entity.setSolidAreaY( entity.getSolidAreaY() + entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
+							if(entity.available == true){
 							gh.player.total_lives --;
 							if(gh.player.total_lives <= 0){
-								gh.gameStatus = 1;
 								gh.gameThread = null;
+								gh.gameStatus = 1;
 								}
-							
+								entity.available = false;
+							}
 					break;
 					}
 					case "left":
@@ -288,12 +291,14 @@ public class CollisionChecker implements GameConstants {
 					entity.setSolidAreaX( entity.getSolidAreaX() - entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
+							if(entity.available == true){
 							gh.player.total_lives --;
 							if(gh.player.total_lives <= 0){
-								gh.gameStatus = 1;
 								gh.gameThread = null;
+								gh.gameStatus = 1;
 								}
-							
+								entity.available = false;
+							}
 					break;
 					}
 					case "right":
@@ -301,13 +306,14 @@ public class CollisionChecker implements GameConstants {
 					entity.setSolidAreaX( entity.getSolidAreaX() + entity.getSpeed() );
 					if(entity.solidArea.intersects(gh.player.solidArea) == true){
 							entity.setCollide(true);
+							if(entity.available == true){
 							gh.player.total_lives --;
 							if(gh.player.total_lives <= 0){
-								gh.gameStatus = 1;
 								gh.gameThread = null;
-								
+								gh.gameStatus = 1;
+								}
+								entity.available = false;
 							}
-
 					break;
 					}
 				}

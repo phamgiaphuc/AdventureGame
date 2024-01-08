@@ -28,6 +28,8 @@ public class Player extends Character {
     private boolean isSpeedUp = false;
     private boolean isShieldExisted = false;
 
+    public boolean Xfactor;
+
     public final int screenX;
     public final int screenY;
 
@@ -37,11 +39,12 @@ public class Player extends Character {
         super(gh);
 
         this.keyH = keyH;
+        this.Xfactor = false;
 
         this.screenX = GameConstants.screenHeight / 2 - (GameConstants.tileSize / 2);
         this.screenY = GameConstants.screenWidth / 2 - (GameConstants.tileSize / 2);
 
-        this.max_total_lives = 6;
+        this.max_total_lives = 8;
         this.x_coordinate = 2 * GameConstants.tileSize;
         this.y_coordinate = 4 * GameConstants.tileSize;
         this.total_lives = this.max_total_lives;
@@ -78,6 +81,9 @@ public class Player extends Character {
     }
 
     public void update() {
+        
+        //System.out.println(x_coordinate/ 48 + " " + y_coordinate/ 48);
+        
         if (keyH.upPressed == true || keyH.downPressed == true ||
                 keyH.leftPressed == true || keyH.rightPressed == true) {
             if (keyH.upPressed == true) {
@@ -95,6 +101,7 @@ public class Player extends Character {
 
             int indexItem = gh.checker.checkItem(this, true);
             open(indexItem);
+            loot(indexItem);
             int indexEntity = gh.checker.checkEntity(this, gh.bot);
             //System.out.println(indexEntity + indexItem + "example");
             
@@ -135,9 +142,14 @@ public class Player extends Character {
             gh.bulletList.add(new Bullet((this.getX()) , (this.getY()), direction,gh));
         }
     }
-    public void open(int i){
-        if(i!= 1000 && gh.quantity == 0){
+public void open(int i){
+        if(i!= 1000 && gh.quantity == 0 && Xfactor == true)
             gh.gameStatus = 5;
+    }
+public void loot(int i){
+    if(i== 1){
+            this.Xfactor = true;
+            gh.item[i] = null;
     }
 }
 
