@@ -1,6 +1,5 @@
 package dev.entities;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -17,6 +16,8 @@ public class Character {
         
     public int total_lives;
     public int max_total_lives;
+
+    public boolean gun;
 
     public int x_coordinate;
     public int y_coordinate;
@@ -163,8 +164,6 @@ public class Character {
 								break;
 							}
 			g2.drawImage(image, screenX, screenY, GameConstants.tileSize, GameConstants.tileSize, null);
-            g2.setColor(Color.RED);
-            g2.drawRect(screenX + getSolidAreaY(),screenY  + getSolidAreaX(), 32, 32);
 			}
 
 	}

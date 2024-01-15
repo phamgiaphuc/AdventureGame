@@ -29,6 +29,7 @@ public class Bot extends Character {
 
     public int[][] check;
 
+    public String tmp;
     
     //player
     public int playerX, playerY;
@@ -168,13 +169,35 @@ public void tracking(){
 public void setAction(){
     time ++;
     if(this.level == 3){
-    trespassing();
+    
+        trespassing();
+    if(gun == true){
+
+    if(time == 45){
+        Random rand = new Random();
+        count = rand.nextInt(40);
+        if(count <= 10)
+            tmp = "left";
+        else if(count > 10 && count <= 20)
+            tmp = "right";
+        else if(count > 20 && count <= 30)
+            tmp = "up";
+        else if(count >= 30)
+           tmp = "down";
+
+        gh.bulletList.add(new Bullet(this.x_coordinate , this.y_coordinate, tmp,gh));
+        System.out.println("tien");
+    }
+    }
     if(this.zone == true){
         attack();
         tracking();
-        move();
+        move();{
+
+
+    }
     }else{
-        if(time == 25){
+        if(time == 50){
         Random rand = new Random();
         count = rand.nextInt(40);
         if(count <= 10)
@@ -225,6 +248,70 @@ public void update(){
         setAction();
 
     }
+	// public int damage(Character entity){
+
+		
+	// 	int pillar = 1000;
+
+
+	// 	{
+    //         int hardX = this.solidArea.x;
+    //         int hardY = this.solidArea.y;
+    //         this.solidArea.x += this.x;
+    //         this.solidArea.y += this.y;
+    //         int solidX = gh.player.solidArea.x;
+    //         int solidY = gh.player.solidArea.y;
+    //         gh.player.solidArea.x += gh.player.getX();
+    //         gh.player.solidArea.y += gh.player.getY();
+
+	// 			switch (this.direction) {
+	// 				case "up":
+
+	// 				this.Y -= speed;
+	// 				if(this.solidArea.intersects(gh.player.solidArea) == true){
+    //                         dead(gh.player);
+    //                         this.shot = true;
+
+	// 				}
+	// 				break;
+	// 				case "down":
+
+	// 				this.y += speed;
+	// 				if(this.solidArea.intersects(gh.player.solidArea) == true){
+    //                         dead(gh.player);
+    //                     this.shot = true;
+
+	// 				}
+	// 				break;
+	// 				case "left":
+
+	// 				this.x -= speed;
+	// 				if(this.solidArea.intersects(gh.player.solidArea) == true){
+    //                             dead(gh.player);
+    //                         this.shot = true;
+	// 				}
+	// 				break;
+	// 				case "right":
+
+	// 				this.x += speed;
+	// 				if(this.solidArea.intersects(gh.player.solidArea) == true){
+    //                             dead(gh.player);
+    //                         this.shot = true;
+
+					
+	// 				}
+	// 				break;
+	// 			}
+    //         this.solidArea.x = hardX;
+    //         this.solidArea.y = hardY;
+    //         this.solidArea.x = solidX;
+    //         this.solidArea.y = solidY;
+
+	// 		}
+
+	// 	return pillar;
+
+	// }
 
 
     public void move(){

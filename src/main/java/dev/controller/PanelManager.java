@@ -35,7 +35,7 @@ public class PanelManager {
         if (gh.gameStatus == 1) {
             // game over
             g2.setFont(new Font("Comic Sans MS", Font.PLAIN, 65));
-            g2.setPaint(new Color(102, 178, 255));
+            g2.setPaint(new Color(160, 160, 160));
             g2.fillRect(0, 0, GameConstants.screenWidth, GameConstants.screenHeight);
 
             g2.setPaint(Color.black);
@@ -76,10 +76,9 @@ public class PanelManager {
             } catch (IOException e) {
             }
             count = (count == 60) ? 0 : count;
-            //g2.drawImage(player_image, 4* GameConstants.tileSize, 3 * GameConstants.tileSize, (9 * GameConstants.tileSize), 7 *GameConstants.tileSize, null);
             // menu
             g2.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
-            g2.setPaint(new Color(102, 178, 255));
+            g2.setPaint(new Color(160, 160, 160));
             g2.fillRect(0, 0, GameConstants.screenWidth, GameConstants.screenHeight);
 
             g2.setPaint(Color.black);
@@ -87,13 +86,18 @@ public class PanelManager {
             g2.setPaint(Color.white);
             g2.drawString("A Journey of Wild Ranger", GameConstants.screenWidth / 2 - 305, 150);
 
+            g2.drawImage(gh.player.down1, 4* GameConstants.tileSize, 3 * GameConstants.tileSize, (9 * GameConstants.tileSize), 7 *GameConstants.tileSize, null);
+            
+
             //g2.drawImage(img, GameConstants.screenWidth / 2 - 50, 300, null);
 
             g2.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
             g2.setPaint(Color.black);
+            /*
             g2.drawString("Choose a name for your character", GameConstants.screenWidth / 2 - 256, 401);
             g2.setPaint(Color.white);
             g2.drawString("Choose a name for your character", GameConstants.screenWidth / 2 - 255, 400);
+            */
 
             g2.setPaint(Color.black);
             g2.drawString("Press Play to start the game!", GameConstants.screenWidth / 2 - 216, 551);

@@ -28,7 +28,7 @@ Thread gameThread = null;
     public PanelManager panel = new PanelManager(this);
     //public Player player = new Player(((maxScreenCol - 1) / 2) * tileSize, ((maxScreenRow - 1) / 2) * tileSize, "Thien");
     
-    public Player player = new Player(this, keyHandler, "Thien");
+    public Player player = new Player(this, keyHandler, "");
     
     //Manage the objects
     public EntityManager manager = new EntityManager(this);
@@ -101,6 +101,7 @@ Thread gameThread = null;
             if(bot[i] != null)
                 if(bot[i].checkDead() != true){
                     bot[i].update();
+                    
                     res ++;
                 }
                 else{
@@ -137,8 +138,7 @@ Thread gameThread = null;
         if(gameStatus == 2){
         // MAP
         tileHandler.draw(graphics2D);
-        // LIFE
-        panel.drawPlayerLife(graphics2D);
+
         // NPC
         for(int i = 0; i < bot.length; i++){
             //if(bot[i].isDead == true) bot[i] = null;
@@ -155,7 +155,8 @@ Thread gameThread = null;
         for(int i = 0; i <item.length; i++)
             if(item[i] != null)
                 item[i].draw(this, graphics2D);
-        
+        // LIFE
+        panel.drawPlayerLife(graphics2D);
         // PLAYER
         player.draw(graphics2D);
         }
