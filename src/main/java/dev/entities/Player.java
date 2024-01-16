@@ -1,6 +1,5 @@
 package dev.entities;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -102,6 +101,7 @@ public class Player extends Character {
             int indexItem = gh.checker.checkItem(this, true);
             open(indexItem);
             loot(indexItem);
+            lootHeal(indexItem);
             int indexEntity = gh.checker.checkEntity(this, gh.bot);
             //System.out.println(indexEntity + indexItem + "example");
             
@@ -147,9 +147,15 @@ public void open(int i){
             gh.gameStatus = 5;
     }
 public void loot(int i){
-    if(i== 1){
+    if(i==1){
             this.Xfactor = true;
             gh.item[i] = null;
+    }
+}
+public void lootHeal(int i){
+    if(i == 2 && gh.player.total_lives <gh.player.max_total_lives){
+        gh.player.total_lives = max_total_lives;
+        gh.item[i] = null;
     }
 }
 
@@ -206,8 +212,6 @@ public void loot(int i){
         }
         //g2.drawImage(image, screenX, screenY, null);
         graphics2D.drawImage(image, screenY, screenX, this.getWidth(), this.getHeight(), null);
-        graphics2D.setColor(Color.RED);
-        graphics2D.drawRect(screenY + 8, screenX + 16, 32, 32);
         //graphics2D.drawRect(screenY, screenX, 48, 48);
 
         int labelWidth = graphics2D.getFontMetrics().stringWidth(this.getName());

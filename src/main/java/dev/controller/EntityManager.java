@@ -2,6 +2,7 @@ package dev.controller;
 
 import dev.entities.Bot;
 import dev.entities.Door;
+import dev.entities.HeartBoost;
 import dev.entities.Key;
 
 public class EntityManager {
@@ -133,6 +134,10 @@ public class EntityManager {
         gh.item[1] = new Key(gh);
         gh.item[1].WorldX = 20 * GameConstants.tileSize;
         gh.item[1].WorldY = 19 * GameConstants.tileSize;
+        
+        gh.item[2] = new HeartBoost(gh);
+        gh.item[2].WorldX = 1 * GameConstants.tileSize;
+        gh.item[2].WorldY = 1 * GameConstants.tileSize;
 
     }
     

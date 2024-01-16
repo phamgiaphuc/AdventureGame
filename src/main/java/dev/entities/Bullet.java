@@ -163,6 +163,69 @@ public class Bullet {
 
 		return pillar;
 
+	}	public int damagePlayer(Character entity){
+
+		
+		int pillar = 1000;
+
+
+		{
+            int hardX = this.solidArea.x;
+            int hardY = this.solidArea.y;
+            this.solidArea.x += this.x;
+            this.solidArea.y += this.y;
+            int solidX = gh.player.solidArea.x;
+            int solidY = gh.player.solidArea.y;
+            gh.player.solidArea.x += gh.player.getX();
+            gh.player.solidArea.y += gh.player.getY();
+
+				switch (this.direction) {
+					case "up":
+
+					this.y -= speed;
+					if(this.solidArea.intersects(gh.player.solidArea) == true){
+                            dead(gh.player);
+                            this.shot = true;
+
+					}
+					break;
+					case "down":
+
+					this.y += speed;
+					if(this.solidArea.intersects(gh.player.solidArea) == true){
+                            dead(gh.player);
+                        this.shot = true;
+
+					}
+					break;
+					case "left":
+
+					this.x -= speed;
+					if(this.solidArea.intersects(gh.player.solidArea) == true){
+                                dead(gh.player);
+                            this.shot = true;
+					}
+					break;
+					case "right":
+
+					this.x += speed;
+					if(this.solidArea.intersects(gh.player.solidArea) == true){
+                                dead(gh.player);
+                            this.shot = true;
+
+					
+					}
+					break;
+				}
+            this.solidArea.x = hardX;
+            this.solidArea.y = hardY;
+            this.solidArea.x = solidX;
+            this.solidArea.y = solidY;
+
+			}
+
+		return pillar;
+
 	}
     public void dead(Character entity){
     
